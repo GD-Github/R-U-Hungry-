@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>banned.png</file>
+        <file>heart.png</file>
+        <file>home.png</file>
+    </qresource>
+</RCC>
