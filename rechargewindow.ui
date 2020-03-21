@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>RechargeWindow</class>
+ <widget class="QMainWindow" name="RechargeWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>562</width>
+    <height>633</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#centralwidget {
+	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(55, 55, 85);
+	border-radius: 12px;
+}
+
+#logoLbl {	
+	font: 14pt &quot;Ink Free&quot;;
+	background-color: transparent;
+	color: rgb(55, 55, 85);
+	font-weight: bold;
+}
+
+QToolButton:hover {
+	background-color: rgb(255, 255, 255);
+}
+
+QToolButton {
+	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(102, 102, 155);
+	border-radius: 15px;
+}
+
+QPushButton {
+	background-color: rgb(85, 85, 127);
+	color: rgb(255, 255, 255);
+	border: 2px solid rgb(102, 102, 155);
+	border-radius: 8px;
+	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+}
+
+QPushButton:hover {
+	background-color: rgb(255, 255, 255);
+	color: rgb(102, 102, 155);
+}
+
+#rechargeGrpBx {
+	background-color: rgb(235, 248, 255);
+	border: 2px solid rgb(218, 240, 255);
+	border-radius: 6px;
+}
+
+QLineEdit {
+	background-color: rgb(248, 253, 255);
+	border: 2px solid rgb(240, 235, 255);
+	border-radius: 3px;
+	color: rgb(85, 85, 127);
+	qproperty-alignment: AlignCenter;
+	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+}
+
+QLabel {
+	background-color: rgb(240, 235, 255);
+	border-radius: 3px;
+	color: rgb(85, 85, 127);
+	qproperty-alignment: AlignCenter;
+	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+}
+
+QSlider::handle {
+	background-color: rgb(218, 240, 255);
+	border: 1px solid rgb(85, 85, 127);
+	border-radius: 4px;
+}
+
+#amountLbl {
+	background-color: transparent;
+	border-bottom: 1px solid black;
+	border-radius: 0px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QGroupBox" name="rechargeGrpBx">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>190</y>
+      <width>401</width>
+      <height>291</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string/>
+    </property>
+    <widget class="QPushButton" name="payBtn">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>220</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Payer</string>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="amountTxt">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>150</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QSlider" name="maxPriceSlider_2">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>361</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="amountLbl">
+     <property name="geometry">
+      <rect>
+       <x>160</x>
+       <y>20</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Montant</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="cancelBtn">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>220</y>
+       <width>81</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Annuler</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QToolButton" name="homeBtn">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+    <property name="icon">
+     <iconset resource="resources.qrc">
+      <normaloff>:/icons/home.png</normaloff>:/icons/home.png</iconset>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="bannedBtn">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>10</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+    <property name="icon">
+     <iconset resource="resources.qrc">
+      <normaloff>:/icons/banned.png</normaloff>:/icons/banned.png</iconset>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="favoritesBtn">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>10</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+    <property name="icon">
+     <iconset resource="resources.qrc">
+      <normaloff>:/icons/heart.png</normaloff>:/icons/heart.png</iconset>
+    </property>
+   </widget>
+   <widget class="QLabel" name="usernameLbl">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>10</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;username&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="logoutBtn">
+    <property name="geometry">
+     <rect>
+      <x>470</x>
+      <y>10</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="tabletTracking">
+     <bool>false</bool>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string>Déconnexion</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logoLbl">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>10</y>
+      <width>181</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>R U Hungry ?</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
