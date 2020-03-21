@@ -1,0 +1,12 @@
+[
+    {
+        "name":"Boeuf",
+        "price":"2",
+        "description":"Une description"
+    },
+    {
+        "name":"Poulet",
+        "price":"1.55",
+        "description":"Une description"
+    }
+]

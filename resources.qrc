@@ -4,4 +4,7 @@
         <file>heart.png</file>
         <file>home.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>mealList.json</file>
+    </qresource>
 </RCC>

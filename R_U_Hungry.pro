@@ -20,12 +20,16 @@ SOURCES += \
     favoriteswindow.cpp \
     main.cpp \
     mainwindow.cpp \
+    meal.cpp \
+    mealitem.cpp \
     rechargewindow.cpp
 
 HEADERS += \
     bannedwindow.h \
     favoriteswindow.h \
     mainwindow.h \
+    meal.h \
+    mealitem.h \
     rechargewindow.h
 
 FORMS += \

@@ -2,6 +2,15 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QDebug>
+#include <QJsonDocument>
+#include <QJsonValue>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QVBoxLayout>
+#include <QVector>
+#include "meal.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,6 +26,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QVector<Meal> * availableMeal;
 
 public slots:
     void rechargeBtnAction();
