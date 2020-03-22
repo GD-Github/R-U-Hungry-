@@ -27,7 +27,23 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    void clearLayout(QVBoxLayout * layout);
+
+    QVBoxLayout * startersLikedList = nullptr;
+    QVBoxLayout * dishesLikedList = nullptr;
+    QVBoxLayout * sidesLikedList = nullptr;
+    QVBoxLayout * desertsLikedList = nullptr;
+    QVBoxLayout * drinksLikedList = nullptr;
+
+    QVBoxLayout * startersList = nullptr;
+    QVBoxLayout * dishesList = nullptr;
+    QVBoxLayout * sidesList = nullptr;
+    QVBoxLayout * desertsList = nullptr;
+    QVBoxLayout * drinksList = nullptr;
+
     QVector<Meal*> * availableMeal;
+
 
 public slots:
     void updateLists();

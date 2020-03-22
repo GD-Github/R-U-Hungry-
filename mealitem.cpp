@@ -35,5 +35,5 @@ void MealItem::changeBanned(){
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {
-    qWarning() << "test";
+
 }
