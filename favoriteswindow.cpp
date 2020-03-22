@@ -15,16 +15,21 @@ FavoritesWindow::FavoritesWindow(QVector<Meal*> * availableMeal, QWidget *parent
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
     connect(ui->logoutBtn,SIGNAL(clicked()),this,SLOT(exit()));
 
-    QVBoxLayout * listLayout = ui->likedList;
-    for(Meal * meal: (*availableMeal)){
-        if(meal->getIsLiked()){
-            listLayout->addWidget(new MealItem(this,meal));
-        }
-    }
+    QScrollArea *mealLikedScrollArea = ui->favoriteMealArea;
+    mealLikedScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    mealLikedScrollArea->setWidgetResizable( true );
+
+    QWidget *widget = new QWidget();
+    mealLikedScrollArea->setWidget( widget );
+    mealLikedList = new QVBoxLayout();
+    widget->setLayout( mealLikedList );
+
+    updateLists();
 }
 
 FavoritesWindow::~FavoritesWindow()
 {
+    delete availableMeal;
     delete ui;
 }
 
@@ -52,16 +57,16 @@ void FavoritesWindow::exit()
 }
 
 void FavoritesWindow::updateLists(){
-    QVBoxLayout * likedList = ui->likedList;
+
     QLayoutItem *childLiked;
-    while ((childLiked = likedList->takeAt(0)) != 0) {
-        QWidget* stepchild;
-        stepchild=childLiked->widget();
-        delete stepchild;
+    while ((childLiked = mealLikedList->takeAt(0)) != 0) {
+        delete childLiked->widget();
         delete childLiked;
     }
 
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) likedList->addWidget(new MealItem(this,*it));
+        if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) mealLikedList->addWidget(new MealItem(this,*it));
     }
+
+    update();
 }

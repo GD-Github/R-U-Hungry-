@@ -82,19 +82,6 @@ QLabel {
      <string>R U Hungry ?</string>
     </property>
    </widget>
-   <widget class="QGroupBox" name="bannedGrpBx">
-    <property name="geometry">
-     <rect>
-      <x>50</x>
-      <y>110</y>
-      <width>461</width>
-      <height>451</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string/>
-    </property>
-   </widget>
    <widget class="QLabel" name="bannedLbl">
     <property name="geometry">
      <rect>
@@ -211,6 +198,29 @@ QLabel {
     <property name="text">
      <string>&lt;username&gt;</string>
     </property>
+   </widget>
+   <widget class="QScrollArea" name="bannedMealArea">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>140</y>
+      <width>461</width>
+      <height>441</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>459</width>
+       <height>439</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
  </widget>

@@ -22,6 +22,7 @@ public:
 private:
     Ui::FavoritesWindow *ui;
     QVector<Meal*> * availableMeal;
+    QVBoxLayout * mealLikedList = nullptr;
 public slots:
     void homeBtnAction();
     void bannedBtnAction();

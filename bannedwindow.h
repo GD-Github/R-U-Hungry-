@@ -22,11 +22,13 @@ public:
 private:
     Ui::BannedWindow *ui;
     QVector<Meal*> * availableMeal;
+    QVBoxLayout * mealBannedList = nullptr;
 
 public slots:
     void homeBtnAction();
     void favoritesBtnAction();
     void exit();
+    void updateLists();
 };
 
 #endif // BANNEDWINDOW_H
