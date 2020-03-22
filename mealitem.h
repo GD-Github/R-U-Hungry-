@@ -21,10 +21,14 @@ class MealItem : public QWidget
 
 public:
     MealItem(QWidget* parent, Meal * item);
+    Meal * getMeal() {return meal;}
 
 private:
     QWidget * parent;
     Meal * meal;
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 
 public slots:
     void changeLiked();

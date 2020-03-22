@@ -11,6 +11,7 @@
 #include <QVBoxLayout>
 #include <QVector>
 #include "meal.h"
+#include "mealitem.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -29,6 +30,7 @@ private:
     QVector<Meal*> * availableMeal;
 
 public slots:
+    void updateLists();
     void rechargeBtnAction();
     void favoritesBtnAction();
     void bannedBtnAction();

@@ -16,15 +16,24 @@ MealItem::MealItem(QWidget * parent , Meal * item) :QWidget()
 
     connect(likeButton,SIGNAL(clicked()),this,SLOT(changeLiked()));
     connect(bannedButton,SIGNAL(clicked()),this,SLOT(changeBanned()));
+    connect(this,SIGNAL(likedAsChanged()),parent,SLOT(updateLists()));
+    connect(this,SIGNAL(bannedAsChanged()),parent,SLOT(updateLists()));
 }
 
 void MealItem::changeLiked(){
-    qWarning() << "liked";
-    meal->setIsLiked(!meal->getIsLiked());
+    qWarning() << "like clicked";
+    bool state = !meal->getIsLiked();
+    meal->setIsLiked(state);
     emit likedAsChanged();
 }
 
 void MealItem::changeBanned(){
+    qWarning() << "banned clicked";
     meal->setIsBanned(!meal->getIsBanned());
     emit bannedAsChanged();
+}
+
+void MealItem::mousePressEvent(QMouseEvent *event)
+{
+    qWarning() << "test";
 }

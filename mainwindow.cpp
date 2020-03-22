@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "mealitem.h"
+
 
 
 #include "rechargewindow.h"
@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete availableMeal;
     delete ui;
 }
 
@@ -65,6 +66,32 @@ void MainWindow::bannedBtnAction()
     bw->setAttribute(Qt::WA_TranslucentBackground);
     bw->show();
     this->hide();
+}
+
+void MainWindow::updateLists(){
+    QVBoxLayout * likedList = ui->likedMeal;
+    QLayoutItem *childMeal;
+    QVBoxLayout * mealList = ui->mealList;
+    QLayoutItem *childLiked;
+    while ((childMeal = mealList->takeAt(0)) != 0) {
+        QWidget* stepchild;
+        stepchild=childMeal->widget();
+        delete stepchild;
+        delete childMeal;
+    }
+    while ((childLiked = likedList->takeAt(0)) != 0) {
+        QWidget* stepchild;
+        stepchild=childLiked->widget();
+        delete stepchild;
+        delete childLiked;
+    }
+
+    for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
+        if(!(*it)->getIsBanned()) mealList->addWidget(new MealItem(this,*it));
+        if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) likedList->addWidget(new MealItem(this,*it));
+    }
+
+    update();
 }
 
 void MainWindow::exit()

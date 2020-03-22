@@ -835,16 +835,16 @@ QScrollBar::handle:vertical {
          <enum>Qt::Vertical</enum>
         </property>
        </widget>
-       <widget class="QWidget" name="verticalLayoutWidget">
+       <widget class="QWidget" name="verticalLayoutWidget_2">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
           <width>491</width>
-          <height>81</height>
+          <height>71</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="mealList"/>
+        <layout class="QVBoxLayout" name="likedMeal"/>
        </widget>
       </widget>
      </widget>
@@ -881,6 +881,17 @@ QScrollBar::handle:vertical {
         <property name="orientation">
          <enum>Qt::Vertical</enum>
         </property>
+       </widget>
+       <widget class="QWidget" name="verticalLayoutWidget">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>491</width>
+          <height>151</height>
+         </rect>
+        </property>
+        <layout class="QVBoxLayout" name="mealList"/>
        </widget>
       </widget>
      </widget>
