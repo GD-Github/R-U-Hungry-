@@ -20,7 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QString json_string;
     QFile file;
-    availableMeal = new QVector<Meal>();
+    availableMeal = new QVector<Meal*>();
     QVBoxLayout * mealList = ui->mealList;
     file.setFileName(":/mealList.json");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     QJsonArray jsonArray = doc.array();
     for(auto it = jsonArray.begin() ; it!=jsonArray.end() ; ++it){
         QJsonObject mealObject = it->toObject();
-        availableMeal->append(Meal(mealObject["name"].toString(),(float)mealObject["price"].toDouble(),false,false));
+        availableMeal->append(new Meal(mealObject["name"].toString(),(float)mealObject["price"].toDouble(),false,false));
         mealList->addWidget(new MealItem(this,availableMeal->last()));
     }
 }

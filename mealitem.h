@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QIcon>
+#include <QDebug>
 #include "meal.h"
 
 /*
@@ -19,7 +20,18 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(QWidget* parent, Meal item);
+    MealItem(QWidget* parent, Meal * item);
+
+private:
+    QWidget * parent;
+    Meal * meal;
+
+public slots:
+    void changeLiked();
+    void changeBanned();
+signals:
+    void likedAsChanged();
+    void bannedAsChanged();
 };
 
 #endif // MEALITEM_H

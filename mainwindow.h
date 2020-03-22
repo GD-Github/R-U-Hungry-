@@ -26,7 +26,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QVector<Meal> * availableMeal;
+    QVector<Meal*> * availableMeal;
 
 public slots:
     void rechargeBtnAction();
