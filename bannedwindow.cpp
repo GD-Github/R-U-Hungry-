@@ -4,10 +4,11 @@
 #include "mainwindow.h"
 #include "favoriteswindow.h"
 
-BannedWindow::BannedWindow(QWidget *parent) :
+BannedWindow::BannedWindow(QVector<Meal*> * availableMeal, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::BannedWindow)
 {
+    this->availableMeal = availableMeal;
     ui->setupUi(this);
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
@@ -36,9 +37,10 @@ void BannedWindow::exit()
 
 void BannedWindow::favoritesBtnAction()
 {
-    FavoritesWindow * fw = new FavoritesWindow(this);
+    FavoritesWindow * fw = new FavoritesWindow(availableMeal,this);
     fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     fw->setAttribute(Qt::WA_TranslucentBackground);
     fw->show();
     this->hide();
 }
+
