@@ -1,6 +1,6 @@
 #include "mealitem.h"
 
-MealItem::MealItem(QWidget * parent , Meal * item) :QWidget()
+MealItem::MealItem(Meal_Window * parent , Meal * item) :QWidget()
 {
     this->parent = parent;
     this->meal = item;
@@ -14,26 +14,12 @@ MealItem::MealItem(QWidget * parent , Meal * item) :QWidget()
     layout->addWidget(bannedButton);
     this->setLayout(layout);
 
-    connect(likeButton,SIGNAL(clicked()),this,SLOT(changeLiked()));
-    connect(bannedButton,SIGNAL(clicked()),this,SLOT(changeBanned()));
-    connect(this,SIGNAL(likedAsChanged()),parent,SLOT(updateLists()));
-    connect(this,SIGNAL(bannedAsChanged()),parent,SLOT(updateLists()));
+    connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getName() ); });
+    connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getName() ); });
 }
 
-void MealItem::changeLiked(){
-    qWarning() << "like clicked";
-    bool state = !meal->getIsLiked();
-    meal->setIsLiked(state);
-    emit likedAsChanged();
-}
-
-void MealItem::changeBanned(){
-    qWarning() << "banned clicked";
-    meal->setIsBanned(!meal->getIsBanned());
-    emit bannedAsChanged();
-}
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {
-
+    qDebug() << "test";
 }

@@ -4,12 +4,16 @@
 #include "mainwindow.h"
 #include "bannedwindow.h"
 
-FavoritesWindow::FavoritesWindow(QVector<Meal*> * availableMeal, QWidget *parent) :
-    QMainWindow(parent),
+FavoritesWindow::FavoritesWindow(User * currentUser, QWidget *parent) :
+    Meal_Window(parent),
     ui(new Ui::FavoritesWindow)
 {
-    this->availableMeal = availableMeal;
+    this->currentUser = currentUser;
+    currentUser->showFavorite();
     ui->setupUi(this);
+
+    this->availableMeal = new QVector<Meal*>();
+    Utils::readMealFromJson("mealList.json",availableMeal);
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
@@ -35,7 +39,7 @@ FavoritesWindow::~FavoritesWindow()
 
 void FavoritesWindow::homeBtnAction()
 {
-    MainWindow * w = new MainWindow(this,availableMeal);
+    MainWindow * w = new MainWindow(this,currentUser);
     w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     w->setAttribute(Qt::WA_TranslucentBackground);
     w->show();
@@ -44,7 +48,7 @@ void FavoritesWindow::homeBtnAction()
 
 void FavoritesWindow::bannedBtnAction()
 {
-    BannedWindow * bw = new BannedWindow(availableMeal,this);
+    BannedWindow * bw = new BannedWindow(currentUser,this);
     bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     bw->setAttribute(Qt::WA_TranslucentBackground);
     bw->show();
@@ -56,6 +60,18 @@ void FavoritesWindow::exit()
     close();
 }
 
+void FavoritesWindow::likedAsChanged(QString name){
+    if(currentUser->favoritesContain(name)) currentUser->removeFavorite(name);
+    else currentUser->addFavorite(name);
+    updateLists();
+}
+
+void FavoritesWindow::bannedAsChanged(QString name){
+    if(currentUser->bannedContain(name)) currentUser->removeBanned(name);
+    else currentUser->addBanned(name);
+    updateLists();
+}
+
 void FavoritesWindow::updateLists(){
 
     QLayoutItem *childLiked;
@@ -65,7 +81,7 @@ void FavoritesWindow::updateLists(){
     }
 
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) mealLikedList->addWidget(new MealItem(this,*it));
+        if(currentUser->favoritesContain((*it)->getName())) mealLikedList->addWidget(new MealItem(this,*it));
     }
 
     update();

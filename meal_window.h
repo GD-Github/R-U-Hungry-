@@ -1,0 +1,17 @@
+#ifndef MEAL_WINDOW_H
+#define MEAL_WINDOW_H
+
+#include <QString>
+#include <QMainWindow>
+
+class Meal_Window : public QMainWindow
+{
+    Q_OBJECT
+public:
+    Meal_Window(QWidget * parent):QMainWindow(parent){}
+public slots:
+    virtual void likedAsChanged(QString name)=0;
+    virtual void bannedAsChanged(QString name)=0;
+};
+
+#endif // MEAL_WINDOW_H

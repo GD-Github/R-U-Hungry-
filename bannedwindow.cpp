@@ -4,12 +4,15 @@
 #include "mainwindow.h"
 #include "favoriteswindow.h"
 
-BannedWindow::BannedWindow(QVector<Meal*> * availableMeal, QWidget *parent) :
-    QMainWindow(parent),
+BannedWindow::BannedWindow(User * currentUser, QWidget *parent) :
+    Meal_Window(parent),
     ui(new Ui::BannedWindow)
 {
-    this->availableMeal = availableMeal;
+    this->currentUser = currentUser;
     ui->setupUi(this);
+
+    this->availableMeal = new QVector<Meal*>();
+    Utils::readMealFromJson("mealList.json",availableMeal);
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
@@ -34,7 +37,7 @@ BannedWindow::~BannedWindow()
 
 void BannedWindow::homeBtnAction()
 {
-    MainWindow * w = new MainWindow(this,availableMeal);
+    MainWindow * w = new MainWindow(this,currentUser);
     w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     w->setAttribute(Qt::WA_TranslucentBackground);
     w->show();
@@ -48,11 +51,23 @@ void BannedWindow::exit()
 
 void BannedWindow::favoritesBtnAction()
 {
-    FavoritesWindow * fw = new FavoritesWindow(availableMeal,this);
+    FavoritesWindow * fw = new FavoritesWindow(currentUser,this);
     fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     fw->setAttribute(Qt::WA_TranslucentBackground);
     fw->show();
     this->hide();
+}
+
+void BannedWindow::likedAsChanged(QString name){
+    if(currentUser->favoritesContain(name)) currentUser->removeFavorite(name);
+    else currentUser->addFavorite(name);
+    updateLists();
+}
+
+void BannedWindow::bannedAsChanged(QString name){
+    if(currentUser->bannedContain(name)) currentUser->removeBanned(name);
+    else currentUser->addBanned(name);
+    updateLists();
 }
 
 void BannedWindow::updateLists(){
@@ -64,7 +79,7 @@ void BannedWindow::updateLists(){
     }
 
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if((*it)->getIsBanned()) mealBannedList->addWidget(new MealItem(this,*it));
+        if(currentUser->bannedContain((*it)->getName())) mealBannedList->addWidget(new MealItem(this,*it));
     }
 
     update();

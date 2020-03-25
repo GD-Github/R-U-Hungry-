@@ -9,6 +9,7 @@
 #include <QIcon>
 #include <QDebug>
 #include "meal.h"
+#include "meal_window.h"
 
 /*
  Widget affichant les données d'un plat ( pour mettre dans une liste)
@@ -20,19 +21,16 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(QWidget* parent, Meal * item);
+    MealItem(Meal_Window* parent, Meal * item);
     Meal * getMeal() {return meal;}
 
 private:
-    QWidget * parent;
+    Meal_Window * parent;
     Meal * meal;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 
-public slots:
-    void changeLiked();
-    void changeBanned();
 signals:
     void likedAsChanged();
     void bannedAsChanged();

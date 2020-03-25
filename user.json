@@ -1,0 +1,18 @@
+{
+    "charles":{
+        "liked":["Couscous","Sole"],
+        "banned":["Saumon","Chili végétarien"]
+    },
+    "guillaume":{
+        "liked":[],
+        "banned":[]
+    },
+    "gwilherm":{
+        "liked":[],
+        "banned":[]
+    },
+    "rita":{
+        "liked":[],
+        "banned":[]
+    }
+}

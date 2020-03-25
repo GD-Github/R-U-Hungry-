@@ -6,5 +6,6 @@
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>
+        <file>user.json</file>
     </qresource>
 </RCC>

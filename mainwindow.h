@@ -12,17 +12,22 @@
 #include <QVector>
 #include "meal.h"
 #include "mealitem.h"
+#include "user.h"
+#include "utils.h"
+#include "meal_window.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MainWindow : public Meal_Window
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, QVector<Meal*> * m_availableMeal = nullptr);
+    MainWindow(QWidget *parent = nullptr, User * currentUser = nullptr);
+    User * getUser() {return currentUser;}
+    void updateLists();
     ~MainWindow();
 
 private:
@@ -44,12 +49,16 @@ private:
 
     QVector<Meal*> * availableMeal;
 
+    User * currentUser;
+
 
 public slots:
-    void updateLists();
+
     void rechargeBtnAction();
     void favoritesBtnAction();
     void bannedBtnAction();
     void exit();
+    void likedAsChanged(QString name) override;
+    void bannedAsChanged(QString name) override;
 };
 #endif // MAINWINDOW_H
