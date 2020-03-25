@@ -13,19 +13,19 @@ class User
 {
 public:
     User(QString name);
-    void addFavorite(QString name);
-    void removeFavorite(QString name);
-    void addBanned(QString name);
-    void removeBanned(QString name);
-    bool favoritesContain(QString name);
-    bool bannedContain(QString name);
+    void addFavorite(int id);
+    void removeFavorite(int id);
+    void addBanned(int id);
+    void removeBanned(int id);
+    bool favoritesContain(int id);
+    bool bannedContain(int id);
     void showFavorite();
 
 
 private:
     QString name;
-    QVector<QString> * favoriteMeal;
-    QVector<QString> * bannedMeal;
+    QVector<int> * favoriteMeal;
+    QVector<int> * bannedMeal;
 };
 
 #endif // USER_H

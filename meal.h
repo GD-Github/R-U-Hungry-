@@ -11,7 +11,8 @@
 class Meal
 {
 public:
-    Meal(QString name,int type, float price, bool isVegetarian, bool containAllergene);
+    Meal(int id, QString name,int type, float price, bool isVegetarian, bool containAllergene);
+    int getId() {return id;}
     QString getName() {return name;}
     float getPrice() {return price;}
     bool getIsVegetarian() {return isVegetarian;}
@@ -19,6 +20,7 @@ public:
     int getType() {return type;}
 
 private:
+    int id;
     QString name;
     float price;
     bool isVegetarian;

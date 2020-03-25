@@ -10,8 +10,8 @@ class Meal_Window : public QMainWindow
 public:
     Meal_Window(QWidget * parent):QMainWindow(parent){}
 public slots:
-    virtual void likedAsChanged(QString name)=0;
-    virtual void bannedAsChanged(QString name)=0;
+    virtual void likedAsChanged(int id)=0;
+    virtual void bannedAsChanged(int id)=0;
 };
 
 #endif // MEAL_WINDOW_H

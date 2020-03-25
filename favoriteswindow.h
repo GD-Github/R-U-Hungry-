@@ -24,7 +24,7 @@ public:
 
 private:
     Ui::FavoritesWindow *ui;
-    QVector<Meal*> * availableMeal;
+    QVector<Meal*> * allMeal;
     QVBoxLayout * mealLikedList = nullptr;
     User * currentUser;
 
@@ -32,8 +32,8 @@ public slots:
     void homeBtnAction();
     void bannedBtnAction();
     void exit();
-    void likedAsChanged(QString name) override;
-    void bannedAsChanged(QString name) override;
+    void likedAsChanged(int id) override;
+    void bannedAsChanged(int id) override;
 };
 
 #endif // FAVORITESWINDOW_H

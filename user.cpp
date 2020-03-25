@@ -5,8 +5,8 @@ User::User(QString name) : name(name)
     QString json_string;
     QFile file;
 
-    favoriteMeal = new QVector<QString>();
-    bannedMeal = new QVector<QString>();
+    favoriteMeal = new QVector<int>();
+    bannedMeal = new QVector<int>();
 
     file.setFileName(":/user.json");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
@@ -21,14 +21,14 @@ User::User(QString name) : name(name)
         if(value!=QJsonValue::Undefined){
             QJsonArray likedArray = value.toArray();
             for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
-                favoriteMeal->append(it->toString());
+                favoriteMeal->append(it->toInt());
             }
         }
         value = user.value("banned");
         if(value!=QJsonValue::Undefined){
             QJsonArray bannedArray = value.toArray();
             for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
-                bannedMeal->append(it->toString());
+                bannedMeal->append(it->toInt());
             }
         }
 
@@ -41,27 +41,27 @@ void User::showFavorite(){
     }
 }
 
-void User::addFavorite(QString name)
+void User::addFavorite(int id)
 {
-    favoriteMeal->append(name);
+    favoriteMeal->append(id);
 }
 
-void User::removeFavorite(QString name){
-    favoriteMeal->removeAll(name);
+void User::removeFavorite(int id){
+    favoriteMeal->removeAll(id);
 }
 
-void User::addBanned(QString name){
-    bannedMeal->append(name);
+void User::addBanned(int id){
+    bannedMeal->append(id);
 }
 
-void User::removeBanned(QString name){
-    bannedMeal->removeAll(name);
+void User::removeBanned(int id){
+    bannedMeal->removeAll(id);
 }
 
-bool User::favoritesContain(QString name){
-    return favoriteMeal->contains(name);
+bool User::favoritesContain(int id){
+    return favoriteMeal->contains(id);
 }
 
-bool User::bannedContain(QString name){
-    return bannedMeal->contains(name);
+bool User::bannedContain(int id){
+    return bannedMeal->contains(id);
 }

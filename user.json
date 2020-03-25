@@ -1,7 +1,7 @@
 {
     "charles":{
-        "liked":["Couscous","Sole"],
-        "banned":["Saumon","Chili végétarien"]
+        "liked":[1,10,5,26],
+        "banned":[3,8,7,21]
     },
     "guillaume":{
         "liked":[],

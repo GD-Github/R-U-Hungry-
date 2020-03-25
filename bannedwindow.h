@@ -27,14 +27,14 @@ private:
     Ui::BannedWindow *ui;
     User * currentUser;
     QVBoxLayout * mealBannedList = nullptr;
-    QVector<Meal*> * availableMeal;
+    QVector<Meal*> * allMeal;
 
 public slots:
     void homeBtnAction();
     void favoritesBtnAction();
     void exit();
-    void likedAsChanged(QString name) override;
-    void bannedAsChanged(QString name) override;
+    void likedAsChanged(int id) override;
+    void bannedAsChanged(int id) override;
 
 };
 

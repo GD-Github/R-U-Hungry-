@@ -11,8 +11,8 @@ BannedWindow::BannedWindow(User * currentUser, QWidget *parent) :
     this->currentUser = currentUser;
     ui->setupUi(this);
 
-    this->availableMeal = new QVector<Meal*>();
-    Utils::readMealFromJson("mealList.json",availableMeal);
+    this->allMeal = new QVector<Meal*>();
+    Utils::readMealFromJson(allMeal);
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
@@ -58,15 +58,15 @@ void BannedWindow::favoritesBtnAction()
     this->hide();
 }
 
-void BannedWindow::likedAsChanged(QString name){
-    if(currentUser->favoritesContain(name)) currentUser->removeFavorite(name);
-    else currentUser->addFavorite(name);
+void BannedWindow::likedAsChanged(int id){
+    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
+    else currentUser->addFavorite(id);
     updateLists();
 }
 
-void BannedWindow::bannedAsChanged(QString name){
-    if(currentUser->bannedContain(name)) currentUser->removeBanned(name);
-    else currentUser->addBanned(name);
+void BannedWindow::bannedAsChanged(int id){
+    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
+    else currentUser->addBanned(id);
     updateLists();
 }
 
@@ -78,8 +78,8 @@ void BannedWindow::updateLists(){
         delete childBanned;
     }
 
-    for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if(currentUser->bannedContain((*it)->getName())) mealBannedList->addWidget(new MealItem(this,*it));
+    for(auto it=allMeal->begin() ; it!=allMeal->end() ; ++it){
+        if(currentUser->bannedContain((*it)->getId())) mealBannedList->addWidget(new MealItem(this,*it));
     }
 
     update();

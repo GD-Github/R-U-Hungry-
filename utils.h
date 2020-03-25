@@ -9,7 +9,8 @@
 #include "meal.h"
 
 namespace Utils {
-    void readMealFromJson(QString filePath,QVector<Meal*> * availableMeal);
+    void readMealFromJson(QVector<Meal*> * allMeal);
+    void readMealFromIndexFile(QString filePath, QVector<Meal*> * availableMeal);
 }
 
 #endif // UTILS_H

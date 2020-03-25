@@ -14,8 +14,8 @@ MealItem::MealItem(Meal_Window * parent , Meal * item) :QWidget()
     layout->addWidget(bannedButton);
     this->setLayout(layout);
 
-    connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getName() ); });
-    connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getName() ); });
+    connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getId() ); });
+    connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
 }
 
 

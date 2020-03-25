@@ -58,7 +58,7 @@ public slots:
     void favoritesBtnAction();
     void bannedBtnAction();
     void exit();
-    void likedAsChanged(QString name) override;
-    void bannedAsChanged(QString name) override;
+    void likedAsChanged(int id) override;
+    void bannedAsChanged(int id) override;
 };
 #endif // MAINWINDOW_H

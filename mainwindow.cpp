@@ -101,7 +101,7 @@ MainWindow::MainWindow(QWidget *parent, User* currentUser)
     widget4->setLayout( drinksList );
 
     availableMeal = new QVector<Meal*>();
-    Utils::readMealFromJson("mealList.json",availableMeal);
+    Utils::readMealFromIndexFile("availableMeal.txt",availableMeal);
 
     updateLists();
 
@@ -149,15 +149,15 @@ void MainWindow::clearLayout(QVBoxLayout * layout){
     }
 }
 
-void MainWindow::likedAsChanged(QString name) {
-    if(currentUser->favoritesContain(name)) currentUser->removeFavorite(name);
-    else currentUser->addFavorite(name);
+void MainWindow::likedAsChanged(int id) {
+    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
+    else currentUser->addFavorite(id);
     updateLists();
 }
 
-void MainWindow::bannedAsChanged(QString name){
-    if(currentUser->bannedContain(name)) currentUser->removeBanned(name);
-    else currentUser->addBanned(name);
+void MainWindow::bannedAsChanged(int id){
+    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
+    else currentUser->addBanned(id);
     updateLists();
 }
 
@@ -177,24 +177,24 @@ void MainWindow::updateLists(){
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
         switch ((*it)->getType()) {
         case 1:
-            if(!currentUser->bannedContain((*it)->getName())) startersList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getName())&&(!currentUser->bannedContain((*it)->getName()))) startersLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it));
             break;
         case 2:
-            if(!currentUser->bannedContain((*it)->getName())) dishesList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getName())&&(!currentUser->bannedContain((*it)->getName()))) dishesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it));
             break;
         case 3:
-            if(!currentUser->bannedContain((*it)->getName())) sidesList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getName())&&(!currentUser->bannedContain((*it)->getName()))) sidesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it));
             break;
         case 4:
-            if(!currentUser->bannedContain((*it)->getName())) desertsList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getName())&&(!currentUser->bannedContain((*it)->getName()))) desertsLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it));
             break;
         case 5:
-            if(!currentUser->bannedContain((*it)->getName())) drinksList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getName())&&(!currentUser->bannedContain((*it)->getName()))) drinksLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it));
             break;
         }
     }
