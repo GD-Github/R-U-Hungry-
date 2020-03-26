@@ -1,11 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 
-
-#include "rechargewindow.h"
-#include "favoriteswindow.h"
-#include "bannedwindow.h"
 
 MainWindow::MainWindow(User* currentUser,QWidget *parent)
     : Meal_Window(parent)
@@ -24,6 +21,28 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     else{
         this->currentUser = currentUser;
     }
+
+    BannedWindow* bw = new BannedWindow(currentUser,this);
+     bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     bw->setAttribute(Qt::WA_TranslucentBackground);
+    RechargeWindow* rw = new RechargeWindow(currentUser,this);
+     rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     rw->setAttribute(Qt::WA_TranslucentBackground);
+     FavoritesWindow* fw = new FavoritesWindow(currentUser,this);
+      fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+      fw->setAttribute(Qt::WA_TranslucentBackground);
+
+     this->bw = bw;
+     this->rw = rw;
+     this->fw = fw;
+
+     rw->setBw(bw);
+     rw->setFw(fw);
+
+     fw->setBw(bw);
+
+     bw->setFw(fw);
+
 
     QScrollArea *startersLikedScrollArea = ui->startersScrollArea_1;
     startersLikedScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -116,27 +135,18 @@ MainWindow::~MainWindow()
 
 void MainWindow::rechargeBtnAction()
 {
-    RechargeWindow * rw = new RechargeWindow(currentUser,this);
-    rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    rw->setAttribute(Qt::WA_TranslucentBackground);
     rw->show();
     this->hide();
 }
 
 void MainWindow::favoritesBtnAction()
 {
-    FavoritesWindow * fw = new FavoritesWindow(currentUser,this);
-    fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    fw->setAttribute(Qt::WA_TranslucentBackground);
     fw->show();
     this->hide();
 }
 
 void MainWindow::bannedBtnAction()
 {
-    BannedWindow * bw = new BannedWindow(currentUser, this);
-    bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    bw->setAttribute(Qt::WA_TranslucentBackground);
     bw->show();
     this->hide();
 }

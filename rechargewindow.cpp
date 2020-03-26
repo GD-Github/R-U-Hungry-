@@ -1,7 +1,5 @@
 #include "rechargewindow.h"
-#include "favoriteswindow.h"
-#include "bannedwindow.h"
-#include "mainwindow.h"
+
 #include "ui_rechargewindow.h"
 #include <iostream>
 #include <string>
@@ -34,27 +32,18 @@ void RechargeWindow::updatePrice(int price){
 }
 
 void RechargeWindow::homeBtnAction(){
-    MainWindow * hw = new MainWindow(currentUser,this);
-    hw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    hw->setAttribute(Qt::WA_TranslucentBackground);
-    hw->show();
+    parentWidget()->show();
     this->hide();
 }
 
 void RechargeWindow::favoritesBtnAction(){
-    FavoritesWindow * fw = new FavoritesWindow(currentUser,this);
-    fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    fw->setAttribute(Qt::WA_TranslucentBackground);
-    fw->show();
     this->hide();
+    this->fw->show();
 }
 
 void RechargeWindow::bannedBtnAction(){
-    BannedWindow * bw = new BannedWindow(currentUser,this);
-    bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    bw->setAttribute(Qt::WA_TranslucentBackground);
-    bw->show();
     this->hide();
+    this->bw->show();
 }
 
 

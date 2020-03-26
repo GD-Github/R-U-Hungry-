@@ -1,8 +1,7 @@
 #include "bannedwindow.h"
 #include "ui_bannedwindow.h"
 
-#include "mainwindow.h"
-#include "favoriteswindow.h"
+
 
 BannedWindow::BannedWindow(User * currentUser, QWidget *parent) :
     Meal_Window(parent),
@@ -37,10 +36,7 @@ BannedWindow::~BannedWindow()
 
 void BannedWindow::homeBtnAction()
 {
-    MainWindow * w = new MainWindow(currentUser,this);
-    w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    w->setAttribute(Qt::WA_TranslucentBackground);
-    w->show();
+    parentWidget()->show();
     this->hide();
 }
 
@@ -51,9 +47,6 @@ void BannedWindow::exit()
 
 void BannedWindow::favoritesBtnAction()
 {
-    FavoritesWindow * fw = new FavoritesWindow(currentUser,this);
-    fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    fw->setAttribute(Qt::WA_TranslucentBackground);
     fw->show();
     this->hide();
 }

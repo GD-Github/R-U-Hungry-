@@ -9,6 +9,7 @@
 #include "utils.h"
 #include "meal_window.h"
 
+
 namespace Ui {
 class FavoritesWindow;
 }
@@ -21,12 +22,14 @@ public:
     explicit FavoritesWindow(User * currentUser = nullptr, QWidget *parent = nullptr);
     ~FavoritesWindow();
     void updateLists();
+    void setBw(QMainWindow* bw){this->bw =bw;}
 
 private:
     Ui::FavoritesWindow *ui;
     QVector<Meal*> * allMeal;
     QVBoxLayout * mealLikedList = nullptr;
     User * currentUser;
+    QMainWindow* bw;
 
 public slots:
     void homeBtnAction();

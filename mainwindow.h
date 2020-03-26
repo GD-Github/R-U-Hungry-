@@ -15,6 +15,10 @@
 #include "user.h"
 #include "utils.h"
 #include "meal_window.h"
+#include"bannedwindow.h"
+#include"favoriteswindow.h"
+#include"rechargewindow.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -50,6 +54,9 @@ private:
     QVector<Meal*> * availableMeal;
 
     User * currentUser;
+    FavoritesWindow* fw;
+    BannedWindow* bw;
+    RechargeWindow* rw;
 
 
 public slots:

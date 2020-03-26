@@ -22,12 +22,14 @@ public:
     explicit BannedWindow( User * currentUser = nullptr, QWidget *parent = nullptr);
     ~BannedWindow();
     void updateLists();
+    void setFw(QMainWindow* fw){this->fw = fw;}
 
 private:
     Ui::BannedWindow *ui;
     User * currentUser;
     QVBoxLayout * mealBannedList = nullptr;
     QVector<Meal*> * allMeal;
+    QMainWindow* fw;
 
 public slots:
     void homeBtnAction();
