@@ -13,6 +13,7 @@ RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
 {
     this->currentUser = currentUser;
     ui->setupUi(this);
+    connect(ui->cancelBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
