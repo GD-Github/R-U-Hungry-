@@ -24,6 +24,7 @@ public:
     void addSolde(int n){solde += n;}
     void removeSolde(double d){solde -= d;}
     double getSolde(){return solde;}
+    QString getName(){return name;}
 
 
 private:

@@ -19,13 +19,13 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
 
     if(currentUser == nullptr){
-        this->currentUser = new User("charles");
+        this->currentUser = new User("Charles");
     }
     else{
         this->currentUser = currentUser;
     }
 
-
+    ui->usernameLbl->setText(currentUser->getName());
 
     BannedWindow* bw = new BannedWindow(currentUser,this);
      bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
