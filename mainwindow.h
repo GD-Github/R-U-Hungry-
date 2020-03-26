@@ -58,9 +58,12 @@ private:
     BannedWindow* bw;
     RechargeWindow* rw;
 
+    double maximumPrice;
+    double totalPrice;
+
 
 public slots:
-
+    void updateSolde(double);
     void updateMaxPrice(int);
     void rechargeBtnAction();
     void favoritesBtnAction();

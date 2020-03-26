@@ -19,9 +19,9 @@ RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
     connect(ui->logoutBtn,SIGNAL(clicked()),this,SLOT(close()));
 
-
-
     connect(ui->rechargeSlider,SIGNAL(valueChanged(int)),this,SLOT(updatePrice(int)));
+
+    connect(ui->payBtn,SIGNAL(clicked()),this,SLOT(pay()));
 }
 
 
@@ -46,6 +46,12 @@ void RechargeWindow::bannedBtnAction(){
     this->bw->show();
 }
 
+void RechargeWindow::pay(){
+    currentUser->addSolde(ui->rechargeSlider->value()/5*5);
+    emit(soldeChanged(currentUser->getSolde()));
+    this->hide();
+    parentWidget()->show();
+}
 
 RechargeWindow::~RechargeWindow()
 {

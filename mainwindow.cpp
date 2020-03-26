@@ -17,12 +17,15 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
     connect(ui->maxPriceSlider,SIGNAL(valueChanged(int)),this,SLOT(updateMaxPrice(int)));
 
+
     if(currentUser == nullptr){
         this->currentUser = new User("charles");
     }
     else{
         this->currentUser = currentUser;
     }
+
+
 
     BannedWindow* bw = new BannedWindow(currentUser,this);
      bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
@@ -44,6 +47,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
      fw->setBw(bw);
 
      bw->setFw(fw);
+     connect(rw,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
 
 
     QScrollArea *startersLikedScrollArea = ui->startersScrollArea_1;
@@ -218,7 +222,22 @@ void MainWindow::updateMaxPrice(int value){
 QString str = QString::fromStdString(std::to_string((30+5*value)/10)+ "." + std::to_string(30+5*value-(30+5*value)/10*10)+ " ") + QChar(0x20AC);
 ui->maxPrice->setText(str);
 update();
+maximumPrice = 3 +0.5*value;
 }
+
+void MainWindow::updateSolde(double value){
+    double rounded = roundf(value * 100) / 100;
+    QString str;
+    if (rounded >=10)
+        str = QString::fromStdString(std::to_string(rounded).substr(0,5) + " ") +QChar(0x20AC);
+    else
+        str = QString::fromStdString(std::to_string(rounded).substr(0,4) + " ") +QChar(0x20AC);
+
+    ui->balanceTxt->setText(str);
+    update();
+}
+
+
 void MainWindow::exit()
 {
     close();

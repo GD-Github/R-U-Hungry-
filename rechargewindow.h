@@ -30,6 +30,10 @@ public slots:
     void homeBtnAction();
     void favoritesBtnAction();
     void bannedBtnAction();
+    void pay();
+
+signals:
+void soldeChanged(double);
 };
 
 #endif // RECHARGEWINDOW_H
