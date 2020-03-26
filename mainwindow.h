@@ -10,6 +10,7 @@
 #include <QJsonObject>
 #include <QVBoxLayout>
 #include <QVector>
+#include <QtGlobal>
 #include "meal.h"
 #include "mealitem.h"
 #include "user.h"

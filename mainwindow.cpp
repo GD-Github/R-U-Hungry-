@@ -230,7 +230,7 @@ maximumPrice = 3 +0.5*value;
 }
 
 void MainWindow::updateSolde(double value){
-    double rounded = roundf(value * 100) / 100;
+    double rounded = qRound(value * 100) / 100;
     QString str;
     if (rounded >=10)
         str = QString::fromStdString(std::to_string(rounded).substr(0,5) + " ") +QChar(0x20AC);
