@@ -15,6 +15,8 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
     connect(ui->logoutBtn,SIGNAL(clicked()),this,SLOT(exit()));
 
+    connect(ui->maxPriceSlider,SIGNAL(valueChanged(int)),this,SLOT(updateMaxPrice(int)));
+
     if(currentUser == nullptr){
         this->currentUser = new User("charles");
     }
@@ -212,6 +214,11 @@ void MainWindow::updateLists(){
     update();
 }
 
+void MainWindow::updateMaxPrice(int value){
+QString str = QString::fromStdString(std::to_string((30+5*value)/10)+ "." + std::to_string(30+5*value-(30+5*value)/10*10)+ " ") + QChar(0x20AC);
+ui->maxPrice->setText(str);
+update();
+}
 void MainWindow::exit()
 {
     close();

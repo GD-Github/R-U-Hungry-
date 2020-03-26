@@ -61,6 +61,7 @@ private:
 
 public slots:
 
+    void updateMaxPrice(int);
     void rechargeBtnAction();
     void favoritesBtnAction();
     void bannedBtnAction();
