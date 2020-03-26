@@ -17,6 +17,9 @@ public:
 
 private:
     Ui::RechargeWindow *ui;
+
+public slots:
+    void updatePrice(int);
 };
 
 #endif // RECHARGEWINDOW_H
