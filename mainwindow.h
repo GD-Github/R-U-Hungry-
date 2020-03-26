@@ -71,5 +71,7 @@ public slots:
     void exit();
     void likedAsChanged(int id) override;
     void bannedAsChanged(int id) override;
+    void updateBanFromFav();
+    void updateFavFromBan();
 };
 #endif // MAINWINDOW_H

@@ -38,6 +38,9 @@ public slots:
     void likedAsChanged(int id) override;
     void bannedAsChanged(int id) override;
 
+signals:
+    void updateFav();
+
 };
 
 #endif // BANNEDWINDOW_H

@@ -37,6 +37,10 @@ public slots:
     void exit();
     void likedAsChanged(int id) override;
     void bannedAsChanged(int id) override;
+
+signals:
+    void updateBanned();
+
 };
 
 #endif // FAVORITESWINDOW_H

@@ -55,6 +55,7 @@ void BannedWindow::likedAsChanged(int id){
     if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
     else currentUser->addFavorite(id);
     updateLists();
+    emit(updateFav());
 }
 
 void BannedWindow::bannedAsChanged(int id){

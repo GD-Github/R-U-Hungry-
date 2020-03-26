@@ -57,12 +57,14 @@ void FavoritesWindow::likedAsChanged(int id){
     if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
     else currentUser->addFavorite(id);
     updateLists();
+
 }
 
 void FavoritesWindow::bannedAsChanged(int id){
     if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
     else currentUser->addBanned(id);
     updateLists();
+    emit(updateBanned());
 }
 
 void FavoritesWindow::updateLists(){

@@ -45,7 +45,8 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
      bw->setFw(fw);
      connect(rw,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
-
+     connect(fw,SIGNAL(updateBanned()),this,SLOT(updateBanFromFav()));
+     connect(bw,SIGNAL(updateFav()),this,SLOT(updateFavFromBan()));
 
     QScrollArea *startersLikedScrollArea = ui->startersScrollArea_1;
     startersLikedScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -240,6 +241,13 @@ void MainWindow::updateSolde(double value){
     update();
 }
 
+void MainWindow::updateFavFromBan(){
+    fw->updateLists();
+}
+
+void MainWindow::updateBanFromFav(){
+    bw->updateLists();
+}
 
 void MainWindow::exit()
 {
