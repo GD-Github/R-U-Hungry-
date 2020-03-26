@@ -19,7 +19,7 @@
 #include"bannedwindow.h"
 #include"favoriteswindow.h"
 #include"rechargewindow.h"
-
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,6 +36,9 @@ public:
     ~MainWindow();
 
 private:
+
+    QMessageBox * confirmationBox;
+    QMessageBox* rechargeBox;
     Ui::MainWindow *ui;
 
     void clearLayout(QVBoxLayout * layout);
@@ -60,7 +63,7 @@ private:
     RechargeWindow* rw;
 
     double maximumPrice;
-    double totalPrice;
+    double totalPrice ;
 
 
 public slots:
@@ -74,5 +77,9 @@ public slots:
     void bannedAsChanged(int id) override;
     void updateBanFromFav();
     void updateFavFromBan();
+    void command();
+
+signals:
+    void soldeChanged(double);
 };
 #endif // MAINWINDOW_H

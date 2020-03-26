@@ -3,7 +3,8 @@
 
 #include "user.h"
 #include <QMainWindow>
-
+#include<QMessageBox>
+#include <QPushButton>
 
 namespace Ui {
 class RechargeWindow;
@@ -20,6 +21,7 @@ public:
     void setFw(QMainWindow* fw){this->fw = fw;}
 
 private:
+    QMessageBox* confirmationBox;
     Ui::RechargeWindow *ui;
     User * currentUser;
     QMainWindow * bw;

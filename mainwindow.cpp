@@ -9,6 +9,30 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    totalPrice = 3;
+
+    QString totalStr;
+    if(totalPrice<10)
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,4) + " ") +  QChar(0x20AC);
+    else
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,5) + " ") +  QChar(0x20AC);
+
+    ui->totalTxt->setText(totalStr);
+
+    QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
+    QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
+    confirmationBox = new QMessageBox(this);
+    confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
+    confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
+    confirmationBox->setText(QString("Êtes vous sûr de vouloir commander?"));
+    confirmationBox->setWindowTitle(QString("Confirmation"));
+
+    QPushButton* rechargeBtn = new QPushButton(tr("Recharger"),this);
+    rechargeBox = new QMessageBox(this);
+    rechargeBox->addButton(cancelBtn,QMessageBox::NoRole);
+    rechargeBox->addButton(rechargeBtn,QMessageBox::YesRole);
+    rechargeBox->setText(QString("Vous n'avez pas assez d'argent, voulez vous recharger?"));
+    rechargeBox->setWindowTitle(QString("Oups !"));
 
     connect(ui->rechargeBtn,SIGNAL(clicked()),this,SLOT(rechargeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
@@ -17,7 +41,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
     connect(ui->maxPriceSlider,SIGNAL(valueChanged(int)),this,SLOT(updateMaxPrice(int)));
 
-
+    connect(ui->commandBtn,SIGNAL(clicked()),this,SLOT(command()));
 
      this->currentUser = currentUser;
 
@@ -45,6 +69,8 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
      bw->setFw(fw);
      connect(rw,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
+     connect(this,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
+
      connect(fw,SIGNAL(updateBanned()),this,SLOT(updateBanFromFav()));
      connect(bw,SIGNAL(updateFav()),this,SLOT(updateFavFromBan()));
 
@@ -145,10 +171,8 @@ void MainWindow::rechargeBtnAction()
 
 void MainWindow::favoritesBtnAction()
 {
-    update();
     fw->show();
     this->hide();
-    update();
 }
 
 void MainWindow::bannedBtnAction()
@@ -249,6 +273,20 @@ void MainWindow::updateBanFromFav(){
     bw->updateLists();
 }
 
+void MainWindow::command(){
+    if(currentUser->getSolde()>= this->totalPrice){
+    int val = confirmationBox->exec();
+    if(val ==1){
+    currentUser->removeSolde(totalPrice);
+    emit(soldeChanged(currentUser->getSolde()));
+    update();}}
+    else{
+    int val = rechargeBox->exec();
+    if (val == 1){
+        rw->show();
+        this->hide();    }
+    }
+}
 void MainWindow::exit()
 {
     close();

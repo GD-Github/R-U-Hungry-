@@ -9,6 +9,8 @@ BannedWindow::BannedWindow(User * currentUser, QWidget *parent) :
 {
     this->currentUser = currentUser;
     ui->setupUi(this);
+    ui->usernameLbl->setText(currentUser->getName());
+
 
     this->allMeal = new QVector<Meal*>();
     Utils::readMealFromJson(allMeal);

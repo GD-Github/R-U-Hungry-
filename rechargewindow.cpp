@@ -5,7 +5,6 @@
 #include <string>
 
 
-
 using namespace std;
 RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
     QMainWindow(parent),
@@ -13,6 +12,17 @@ RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
 {
     this->currentUser = currentUser;
     ui->setupUi(this);
+
+    ui->usernameLbl->setText(currentUser->getName());
+
+    QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
+    QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
+
+    confirmationBox = new QMessageBox(this);
+    confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
+    confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
+    confirmationBox->setWindowTitle(QString("Confirmation"));
+
     connect(ui->cancelBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
@@ -48,10 +58,13 @@ void RechargeWindow::bannedBtnAction(){
 }
 
 void RechargeWindow::pay(){
+    confirmationBox->setText(QString::fromStdString("Êtes-vous sûr de vouloir recharger " + to_string(ui->rechargeSlider->value()/5*5)+ " € ?"));
+    int val = confirmationBox->exec();
+    if(val == 1){
     currentUser->addSolde(ui->rechargeSlider->value()/5*5);
     emit(soldeChanged(currentUser->getSolde()));
     this->hide();
-    parentWidget()->show();
+    parentWidget()->show();}
 }
 
 RechargeWindow::~RechargeWindow()

@@ -9,7 +9,9 @@ FavoritesWindow::FavoritesWindow(User * currentUser, QWidget *parent) :
 {
     this->currentUser = currentUser;
     currentUser->showFavorite();
+
     ui->setupUi(this);
+    ui->usernameLbl->setText(currentUser->getName());
 
     this->allMeal = new QVector<Meal*>();
     Utils::readMealFromJson(allMeal);
