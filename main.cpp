@@ -5,14 +5,8 @@
 
 
 int main(int argc, char *argv[])
-{    User * currentUser;
+{    User * currentUser = new User("Charles");
 
-    if(currentUser == nullptr){
-        currentUser = new User("charles");
-    }
-    else{
-        currentUser = currentUser;
-    }
     QApplication a(argc, argv);
     MainWindow* mw = new MainWindow(currentUser,nullptr);
     mw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);

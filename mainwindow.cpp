@@ -18,22 +18,19 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     connect(ui->maxPriceSlider,SIGNAL(valueChanged(int)),this,SLOT(updateMaxPrice(int)));
 
 
-    if(currentUser == nullptr){
-        this->currentUser = new User("Charles");
-    }
-    else{
-        this->currentUser = currentUser;
-    }
+
+     this->currentUser = currentUser;
+
 
     ui->usernameLbl->setText(currentUser->getName());
 
-    BannedWindow* bw = new BannedWindow(currentUser,this);
+    BannedWindow* bw = new BannedWindow(this->currentUser,this);
      bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
      bw->setAttribute(Qt::WA_TranslucentBackground);
-    RechargeWindow* rw = new RechargeWindow(currentUser,this);
+    RechargeWindow* rw = new RechargeWindow(this->currentUser,this);
      rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
      rw->setAttribute(Qt::WA_TranslucentBackground);
-     FavoritesWindow* fw = new FavoritesWindow(currentUser,this);
+     FavoritesWindow* fw = new FavoritesWindow(this->currentUser,this);
       fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
       fw->setAttribute(Qt::WA_TranslucentBackground);
 
@@ -147,8 +144,10 @@ void MainWindow::rechargeBtnAction()
 
 void MainWindow::favoritesBtnAction()
 {
+    update();
     fw->show();
     this->hide();
+    update();
 }
 
 void MainWindow::bannedBtnAction()
