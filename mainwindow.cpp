@@ -168,12 +168,16 @@ void MainWindow::likedAsChanged(int id) {
     if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
     else currentUser->addFavorite(id);
     updateLists();
+    fw->updateLists();
+
 }
 
 void MainWindow::bannedAsChanged(int id){
     if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
     else currentUser->addBanned(id);
     updateLists();
+    bw->updateLists();
+
 }
 
 void MainWindow::updateLists(){

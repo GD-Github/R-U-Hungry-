@@ -5,7 +5,7 @@
 
 
 int main(int argc, char *argv[])
-{    User * currentUser = new User("Charles");
+{    User * currentUser = new User("charles");
 
     QApplication a(argc, argv);
     MainWindow* mw = new MainWindow(currentUser,nullptr);
