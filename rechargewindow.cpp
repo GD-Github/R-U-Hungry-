@@ -3,7 +3,7 @@
 #include "ui_rechargewindow.h"
 #include <iostream>
 #include <string>
-
+#include<QPixmap>
 
 using namespace std;
 RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
@@ -19,6 +19,9 @@ RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
     QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
 
     confirmationBox = new QMessageBox(this);
+    confirmationBox->setIcon(QMessageBox::Warning);
+    confirmationBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+
     confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
     confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
     confirmationBox->setWindowTitle(QString("Confirmation"));

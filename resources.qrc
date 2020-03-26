@@ -3,6 +3,7 @@
         <file>banned.png</file>
         <file>heart.png</file>
         <file>home.png</file>
+        <file>warning.png</file>
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>
