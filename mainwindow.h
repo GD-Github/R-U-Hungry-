@@ -25,7 +25,7 @@ class MainWindow : public Meal_Window
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, User * currentUser = nullptr);
+    MainWindow(User * currentUser = nullptr, QWidget *parent = nullptr );
     User * getUser() {return currentUser;}
     void updateLists();
     ~MainWindow();

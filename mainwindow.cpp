@@ -7,7 +7,7 @@
 #include "favoriteswindow.h"
 #include "bannedwindow.h"
 
-MainWindow::MainWindow(QWidget *parent, User* currentUser)
+MainWindow::MainWindow(User* currentUser,QWidget *parent)
     : Meal_Window(parent)
     , ui(new Ui::MainWindow)
 {
@@ -116,7 +116,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::rechargeBtnAction()
 {
-    RechargeWindow * rw = new RechargeWindow(this);
+    RechargeWindow * rw = new RechargeWindow(currentUser,this);
     rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     rw->setAttribute(Qt::WA_TranslucentBackground);
     rw->show();

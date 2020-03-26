@@ -37,7 +37,7 @@ BannedWindow::~BannedWindow()
 
 void BannedWindow::homeBtnAction()
 {
-    MainWindow * w = new MainWindow(this,currentUser);
+    MainWindow * w = new MainWindow(currentUser,this);
     w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     w->setAttribute(Qt::WA_TranslucentBackground);
     w->show();

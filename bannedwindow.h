@@ -19,7 +19,7 @@ class BannedWindow : public Meal_Window
     Q_OBJECT
 
 public:
-    explicit BannedWindow( User * currentUser, QWidget *parent = nullptr);
+    explicit BannedWindow( User * currentUser = nullptr, QWidget *parent = nullptr);
     ~BannedWindow();
     void updateLists();
 

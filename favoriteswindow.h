@@ -18,7 +18,7 @@ class FavoritesWindow : public Meal_Window
     Q_OBJECT
 
 public:
-    explicit FavoritesWindow(User * currentUser, QWidget *parent = nullptr);
+    explicit FavoritesWindow(User * currentUser = nullptr, QWidget *parent = nullptr);
     ~FavoritesWindow();
     void updateLists();
 
