@@ -55,12 +55,17 @@ private:
     QVBoxLayout * desertsList = nullptr;
     QVBoxLayout * drinksList = nullptr;
 
+    QVBoxLayout * commandList = nullptr;
+
     QVector<Meal*> * availableMeal;
+
+    QVector<int> * currentCommand;
 
     User * currentUser;
     FavoritesWindow* fw;
     BannedWindow* bw;
     RechargeWindow* rw;
+
 
     double maximumPrice;
     double totalPrice ;
@@ -75,8 +80,10 @@ public slots:
     void exit();
     void likedAsChanged(int id) override;
     void bannedAsChanged(int id) override;
+    void cartAsChanged(int id) override;
     void updateBanFromFav();
     void updateFavFromBan();
+    void updateTotalPrice();
     void command();
 
 signals:

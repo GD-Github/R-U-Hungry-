@@ -17,6 +17,10 @@ User::User(QString name) : name(name)
     QJsonValue value = jsonObject.value(name);
     if(value != QJsonValue::Undefined){
         QJsonObject user = value.toObject();
+        value = user.value("solde");
+        if(value!=QJsonValue::Undefined){
+            solde = value.toDouble();
+        }
         value = user.value("liked");
         if(value!=QJsonValue::Undefined){
             QJsonArray likedArray = value.toArray();

@@ -11,14 +11,6 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     ui->setupUi(this);
     totalPrice = 3;
 
-    QString totalStr;
-    if(totalPrice<10)
-    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,4) + " ") +  QChar(0x20AC);
-    else
-    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,5) + " ") +  QChar(0x20AC);
-
-    ui->totalTxt->setText(totalStr);
-
     QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
     QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
     confirmationBox = new QMessageBox(this);
@@ -155,10 +147,23 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     drinksList = new QVBoxLayout();
     widget4->setLayout( drinksList );
 
+
+    QScrollArea *commandScrollArea = ui->commandScrollArea;
+    commandScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    commandScrollArea->setWidgetResizable( true );
+
+    QWidget *widget10 = new QWidget();
+    commandScrollArea->setWidget( widget10 );
+    commandList = new QVBoxLayout();
+    widget10->setLayout( commandList );
+
+    currentCommand = new QVector<int>();
     availableMeal = new QVector<Meal*>();
     Utils::readMealFromIndexFile("availableMeal.txt",availableMeal);
 
+    updateTotalPrice();
     updateLists();
+    updateSolde(currentUser->getSolde());
 
 }
 
@@ -211,6 +216,15 @@ void MainWindow::bannedAsChanged(int id){
 
 }
 
+void MainWindow::cartAsChanged(int id){
+    if(currentCommand->contains(id)){
+        currentCommand->removeAll(id);
+    } else{
+        currentCommand->append(id);
+    }
+    updateLists();
+}
+
 void MainWindow::updateLists(){
 
     clearLayout(startersList);
@@ -224,33 +238,52 @@ void MainWindow::updateLists(){
     clearLayout(desertsLikedList);
     clearLayout(drinksLikedList);
 
+    clearLayout(commandList);
+
+    totalPrice = 0;
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
+        if(currentCommand->contains((*it)->getId())){
+            commandList->addWidget(new MealItem(this,*it,true));
+            totalPrice+=(*it)->getPrice();
+        }
+
         switch ((*it)->getType()) {
         case 1:
-            if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 2:
-            if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 3:
-            if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 4:
-            if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 5:
-            if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it));
-            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it,true));
             break;
         }
     }
-
+    updateTotalPrice();
     update();
 }
+
+void MainWindow::updateTotalPrice(){
+    QString totalStr;
+    if(totalPrice<10)
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,4) + " ") +  QChar(0x20AC);
+    else
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,5) + " ") +  QChar(0x20AC);
+
+    ui->totalTxt->setText(totalStr);
+}
+
 
 void MainWindow::updateMaxPrice(int value){
 QString str = QString::fromStdString(std::to_string((30+5*value)/10)+ "." + std::to_string(30+5*value-(30+5*value)/10*10)+ " ") + QChar(0x20AC);
