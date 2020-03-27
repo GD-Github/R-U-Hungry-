@@ -16,7 +16,17 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked) :QWidg
     layout->addWidget(new QLabel(item->getName()));
 
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
+    if(item->getFavorite()==false){
+        likeButton->setIcon(QIcon(":/icons/empty_heart.png"));
+    }else{
+        likeButton->setIcon(QIcon(":/icons/heart.png"));
+    }
     QPushButton * bannedButton = new QPushButton(QIcon(":/icons/banned.png"),"",this);
+    if(item->getBanned()==false){
+        bannedButton->setIcon(QIcon(":/icons/empty_banned.png"));
+    }else{
+        bannedButton->setIcon(QIcon(":/icons/banned.png"));
+    }
 
     layout->addWidget(likeButton);
     layout->addWidget(bannedButton);

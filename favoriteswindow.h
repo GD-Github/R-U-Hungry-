@@ -23,6 +23,8 @@ public:
     ~FavoritesWindow();
     void updateLists();
     void setBw(QMainWindow* bw){this->bw =bw;}
+    Meal* getMeal(int id);
+    void setAllMeal( QVector<Meal*> * new_meals){ allMeal=new_meals;}
 
 private:
     Ui::FavoritesWindow *ui;
