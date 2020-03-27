@@ -1,17 +1,21 @@
 {
     "charles":{
+        "solde":12,
         "liked":[1,10,5,26],
         "banned":[3,8,7,21]
     },
     "guillaume":{
+        "solde":10,
         "liked":[],
         "banned":[]
     },
     "gwilherm":{
+        "solde":10,
         "liked":[],
         "banned":[]
     },
     "rita":{
+        "solde":10,
         "liked":[],
         "banned":[]
     }

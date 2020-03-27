@@ -12,6 +12,7 @@ public:
 public slots:
     virtual void likedAsChanged(int id)=0;
     virtual void bannedAsChanged(int id)=0;
+    virtual void cartAsChanged(int id){}
 };
 
 #endif // MEAL_WINDOW_H

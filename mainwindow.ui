@@ -735,7 +735,7 @@ QScrollBar::handle:vertical {
      <string>Commander</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
+   <widget class="QScrollArea" name="commandScrollArea">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -756,19 +756,6 @@ QScrollBar::handle:vertical {
        <height>117</height>
       </rect>
      </property>
-     <widget class="QScrollBar" name="verticalScrollBar">
-      <property name="geometry">
-       <rect>
-        <x>520</x>
-        <y>10</y>
-        <width>16</width>
-        <height>101</height>
-       </rect>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Vertical</enum>
-      </property>
-     </widget>
     </widget>
    </widget>
    <widget class="QPushButton" name="sortBtn">

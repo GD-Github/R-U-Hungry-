@@ -31,7 +31,7 @@ private:
     QString name;
     QVector<int> * favoriteMeal;
     QVector<int> * bannedMeal;
-    double solde = 0;
+    double solde;
 
 
 };
