@@ -14,6 +14,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked) :QWidg
             parent->cartAsChanged(this->meal->getId());});
     }
     layout->addWidget(new QLabel(item->getName()));
+    layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)));
 
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
     QPushButton * bannedButton = new QPushButton(QIcon(":/icons/banned.png"),"",this);
