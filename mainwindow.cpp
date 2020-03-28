@@ -44,7 +44,11 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
 
     ui->sortMenu->hide();
+    ui->filterMenu->hide();
 
+    connect(ui->filterBtn,SIGNAL(clicked()),this,SLOT(displayFilterMenu()));
+    connect(ui->filterBtn_2,SIGNAL(clicked()),this,SLOT(filter()));
+    connect(ui->dontFilterBtn,SIGNAL(clicked()),this,SLOT(cancelFilter()));
     connect(ui->sortBtn_2,SIGNAL(clicked()),this,SLOT(sort()));
     connect(ui->dontSortBtn,SIGNAL(clicked()),this,SLOT(cancelSort()));
     connect(ui->sortBtn,SIGNAL(clicked()),this,SLOT(displaySortMenu()));
@@ -496,6 +500,18 @@ void MainWindow::sort(){
 
 void MainWindow::cancelSort(){
     ui->sortMenu->hide();
+}
+
+void MainWindow::displayFilterMenu(){
+    ui->filterMenu->show();
+}
+
+void MainWindow::filter(){
+    ui->filterMenu->hide();
+}
+
+void MainWindow::cancelFilter(){
+    ui->filterMenu->hide();
 }
 void MainWindow::exit()
 {

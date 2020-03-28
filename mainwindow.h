@@ -95,6 +95,9 @@ public slots:
     void displaySortMenu();
     void sort();
     void cancelSort();
+    void displayFilterMenu();
+    void filter();
+    void cancelFilter();
     Meal* getMeal(int id);
 
 signals:
