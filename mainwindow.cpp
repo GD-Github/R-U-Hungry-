@@ -394,6 +394,8 @@ void MainWindow::command(){
     if(val ==1){
     currentUser->removeSolde(totalPrice);
     emit(soldeChanged(currentUser->getSolde()));
+    currentCommand->clear();
+    updateLists();
     update();}}
     else{
     int val = rechargeBox->exec();
@@ -401,8 +403,7 @@ void MainWindow::command(){
         rw->show();
         this->hide();    }
     }
-    currentCommand->clear();
-    updateLists();
+
 }
 void MainWindow::exit()
 {
