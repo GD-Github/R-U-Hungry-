@@ -6,7 +6,6 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     this->hasFavoriteBtn = hasFavoriteBtn;
     this->parent = parent;
     this->meal = item;
-    this->setFixedHeight(50);
     QHBoxLayout *layout = new QHBoxLayout;
 
     if(canBeChecked){

@@ -176,6 +176,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     QWidget *widget10 = new QWidget();
     commandScrollArea->setWidget( widget10 );
     commandList = new QVBoxLayout();
+    commandList->setAlignment(Qt::AlignTop);
     widget10->setLayout( commandList );
 
     currentCommand = new QVector<int>();
