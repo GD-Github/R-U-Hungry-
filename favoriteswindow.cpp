@@ -1,15 +1,20 @@
 #include "favoriteswindow.h"
 #include "ui_favoriteswindow.h"
 
-#include "mainwindow.h"
-#include "bannedwindow.h"
 
-FavoritesWindow::FavoritesWindow(QVector<Meal*> * availableMeal, QWidget *parent) :
-    QMainWindow(parent),
+
+FavoritesWindow::FavoritesWindow(User * currentUser, QWidget *parent) :
+    Meal_Window(parent),
     ui(new Ui::FavoritesWindow)
 {
-    this->availableMeal = availableMeal;
+    this->currentUser = currentUser;
+    currentUser->showFavorite();
+
     ui->setupUi(this);
+    ui->usernameLbl->setText(currentUser->getName());
+
+    this->allMeal = new QVector<Meal*>();
+    Utils::readMealFromJson(allMeal);
 
     connect(ui->homeBtn,SIGNAL(clicked()),this,SLOT(homeBtnAction()));
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
@@ -29,24 +34,18 @@ FavoritesWindow::FavoritesWindow(QVector<Meal*> * availableMeal, QWidget *parent
 
 FavoritesWindow::~FavoritesWindow()
 {
-    delete availableMeal;
+    delete allMeal;
     delete ui;
 }
 
 void FavoritesWindow::homeBtnAction()
 {
-    MainWindow * w = new MainWindow(this,availableMeal);
-    w->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    w->setAttribute(Qt::WA_TranslucentBackground);
-    w->show();
+    parentWidget()->show();
     this->hide();
 }
 
 void FavoritesWindow::bannedBtnAction()
 {
-    BannedWindow * bw = new BannedWindow(availableMeal,this);
-    bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    bw->setAttribute(Qt::WA_TranslucentBackground);
     bw->show();
     this->hide();
 }
@@ -54,6 +53,20 @@ void FavoritesWindow::bannedBtnAction()
 void FavoritesWindow::exit()
 {
     close();
+}
+
+void FavoritesWindow::likedAsChanged(int id){
+    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
+    else currentUser->addFavorite(id);
+    updateLists();
+
+}
+
+void FavoritesWindow::bannedAsChanged(int id){
+    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
+    else currentUser->addBanned(id);
+    updateLists();
+    emit(updateBanned());
 }
 
 void FavoritesWindow::updateLists(){
@@ -64,8 +77,8 @@ void FavoritesWindow::updateLists(){
         delete childLiked;
     }
 
-    for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) mealLikedList->addWidget(new MealItem(this,*it));
+    for(auto it=allMeal->begin() ; it!=allMeal->end() ; ++it){
+        if(currentUser->favoritesContain((*it)->getId())) mealLikedList->addWidget(new MealItem(this,*it));
     }
 
     update();

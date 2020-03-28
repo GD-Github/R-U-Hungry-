@@ -120,8 +120,11 @@ QSlider::handle {
        <height>31</height>
       </rect>
      </property>
+     <property name="text">
+      <string>10 €</string>
+     </property>
     </widget>
-    <widget class="QSlider" name="maxPriceSlider_2">
+    <widget class="QSlider" name="rechargeSlider">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -129,6 +132,15 @@ QSlider::handle {
        <width>361</width>
        <height>31</height>
       </rect>
+     </property>
+     <property name="minimum">
+      <number>10</number>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="singleStep">
+      <number>5</number>
      </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>

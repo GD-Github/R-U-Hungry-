@@ -1,11 +1,20 @@
 #include "mealitem.h"
 
-MealItem::MealItem(QWidget * parent , Meal * item) :QWidget()
+MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked) :QWidget()
 {
     this->parent = parent;
     this->meal = item;
     QHBoxLayout *layout = new QHBoxLayout;
+
+    if(canBeChecked){
+        QCheckBox * addToCart = new QCheckBox();
+        layout->addWidget(addToCart);
+        connect(addToCart,&QCheckBox::stateChanged,[=]{
+            isChecked = !isChecked;
+            parent->cartAsChanged(this->meal->getId());});
+    }
     layout->addWidget(new QLabel(item->getName()));
+    layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)));
 
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
     QPushButton * bannedButton = new QPushButton(QIcon(":/icons/banned.png"),"",this);
@@ -14,26 +23,12 @@ MealItem::MealItem(QWidget * parent , Meal * item) :QWidget()
     layout->addWidget(bannedButton);
     this->setLayout(layout);
 
-    connect(likeButton,SIGNAL(clicked()),this,SLOT(changeLiked()));
-    connect(bannedButton,SIGNAL(clicked()),this,SLOT(changeBanned()));
-    connect(this,SIGNAL(likedAsChanged()),parent,SLOT(updateLists()));
-    connect(this,SIGNAL(bannedAsChanged()),parent,SLOT(updateLists()));
+    connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getId() ); });
+    connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
 }
 
-void MealItem::changeLiked(){
-    qWarning() << "like clicked";
-    bool state = !meal->getIsLiked();
-    meal->setIsLiked(state);
-    emit likedAsChanged();
-}
-
-void MealItem::changeBanned(){
-    qWarning() << "banned clicked";
-    meal->setIsBanned(!meal->getIsBanned());
-    emit bannedAsChanged();
-}
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {
-
+    qDebug() << "test";
 }

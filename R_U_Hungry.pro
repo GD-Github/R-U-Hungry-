@@ -22,15 +22,20 @@ SOURCES += \
     mainwindow.cpp \
     meal.cpp \
     mealitem.cpp \
-    rechargewindow.cpp
+    rechargewindow.cpp \
+    user.cpp \
+    utils.cpp
 
 HEADERS += \
     bannedwindow.h \
     favoriteswindow.h \
     mainwindow.h \
     meal.h \
+    meal_window.h \
     mealitem.h \
-    rechargewindow.h
+    rechargewindow.h \
+    user.h \
+    utils.h
 
 FORMS += \
     bannedwindow.ui \
@@ -45,3 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES +=

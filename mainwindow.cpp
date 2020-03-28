@@ -1,22 +1,76 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <iostream>
 
 
 
-#include "rechargewindow.h"
-#include "favoriteswindow.h"
-#include "bannedwindow.h"
-
-MainWindow::MainWindow(QWidget *parent, QVector<Meal*> * m_availableMeal)
-    : QMainWindow(parent)
+MainWindow::MainWindow(User* currentUser,QWidget *parent)
+    : Meal_Window(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    totalPrice = 3;
+
+    QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
+    QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
+    confirmationBox = new QMessageBox(this);
+    confirmationBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+
+    confirmationBox->setIcon(QMessageBox::Warning);
+    confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
+    confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
+    confirmationBox->setText(QString("Êtes vous sûr de vouloir commander?"));
+    confirmationBox->setWindowTitle(QString("Confirmation"));
+
+    QPushButton* cancelBtn2 = new QPushButton(tr("Annuler"),this);
+    QPushButton* rechargeBtn = new QPushButton(tr("Recharger"),this);
+    rechargeBox = new QMessageBox(this);
+    rechargeBox->setIcon(QMessageBox::Warning);
+    rechargeBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    rechargeBox->addButton(cancelBtn2,QMessageBox::NoRole);
+    rechargeBox->addButton(rechargeBtn,QMessageBox::YesRole);
+    rechargeBox->setText(QString("Vous n'avez pas assez d'argent, voulez vous recharger?"));
+    rechargeBox->setWindowTitle(QString("Oups !"));
 
     connect(ui->rechargeBtn,SIGNAL(clicked()),this,SLOT(rechargeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
     connect(ui->bannedBtn,SIGNAL(clicked()),this,SLOT(bannedBtnAction()));
     connect(ui->logoutBtn,SIGNAL(clicked()),this,SLOT(exit()));
+
+    connect(ui->maxPriceSlider,SIGNAL(valueChanged(int)),this,SLOT(updateMaxPrice(int)));
+
+    connect(ui->commandBtn,SIGNAL(clicked()),this,SLOT(command()));
+
+     this->currentUser = currentUser;
+
+
+    ui->usernameLbl->setText(currentUser->getName());
+
+    BannedWindow* bw = new BannedWindow(this->currentUser,this);
+     bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     bw->setAttribute(Qt::WA_TranslucentBackground);
+    RechargeWindow* rw = new RechargeWindow(this->currentUser,this);
+     rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     rw->setAttribute(Qt::WA_TranslucentBackground);
+     FavoritesWindow* fw = new FavoritesWindow(this->currentUser,this);
+      fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+      fw->setAttribute(Qt::WA_TranslucentBackground);
+
+     this->bw = bw;
+     this->rw = rw;
+     this->fw = fw;
+
+     rw->setBw(bw);
+     rw->setFw(fw);
+
+     fw->setBw(bw);
+
+     bw->setFw(fw);
+     connect(rw,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
+     connect(this,SIGNAL(soldeChanged(double)),this,SLOT(updateSolde(double)));
+
+     connect(fw,SIGNAL(updateBanned()),this,SLOT(updateBanFromFav()));
+     connect(bw,SIGNAL(updateFav()),this,SLOT(updateFavFromBan()));
 
     QScrollArea *startersLikedScrollArea = ui->startersScrollArea_1;
     startersLikedScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
@@ -93,58 +147,47 @@ MainWindow::MainWindow(QWidget *parent, QVector<Meal*> * m_availableMeal)
     drinksList = new QVBoxLayout();
     widget4->setLayout( drinksList );
 
-    if(m_availableMeal == nullptr){
-        QString json_string;
-        QFile file;
-        this->availableMeal = new QVector<Meal*>();
 
-        file.setFileName(":/mealList.json");
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        json_string = file.readAll();
-        file.close();
-        QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
-        QJsonArray jsonArray = doc.array();
-        for(auto it = jsonArray.begin() ; it!=jsonArray.end() ; ++it){
-            QJsonObject mealObject = it->toObject();
-            availableMeal->append(new Meal(mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),false,false));
-        }
-    }else{
-        availableMeal = m_availableMeal;
-    }
+    QScrollArea *commandScrollArea = ui->commandScrollArea;
+    commandScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
+    commandScrollArea->setWidgetResizable( true );
 
+    QWidget *widget10 = new QWidget();
+    commandScrollArea->setWidget( widget10 );
+    commandList = new QVBoxLayout();
+    widget10->setLayout( commandList );
+
+    currentCommand = new QVector<int>();
+    availableMeal = new QVector<Meal*>();
+    Utils::readMealFromIndexFile("availableMeal.txt",availableMeal);
+
+    updateTotalPrice();
     updateLists();
+    updateSolde(currentUser->getSolde());
 
 }
 
 MainWindow::~MainWindow()
 {
+    delete currentUser;
     delete availableMeal;
     delete ui;
 }
 
 void MainWindow::rechargeBtnAction()
 {
-    RechargeWindow * rw = new RechargeWindow(this);
-    rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    rw->setAttribute(Qt::WA_TranslucentBackground);
     rw->show();
     this->hide();
 }
 
 void MainWindow::favoritesBtnAction()
 {
-    FavoritesWindow * fw = new FavoritesWindow(availableMeal,this);
-    fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    fw->setAttribute(Qt::WA_TranslucentBackground);
     fw->show();
     this->hide();
 }
 
 void MainWindow::bannedBtnAction()
 {
-    BannedWindow * bw = new BannedWindow(availableMeal, this);
-    bw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    bw->setAttribute(Qt::WA_TranslucentBackground);
     bw->show();
     this->hide();
 }
@@ -155,6 +198,31 @@ void MainWindow::clearLayout(QVBoxLayout * layout){
       delete child->widget();
       delete child;
     }
+}
+
+void MainWindow::likedAsChanged(int id) {
+    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
+    else currentUser->addFavorite(id);
+    updateLists();
+    fw->updateLists();
+
+}
+
+void MainWindow::bannedAsChanged(int id){
+    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
+    else currentUser->addBanned(id);
+    updateLists();
+    bw->updateLists();
+
+}
+
+void MainWindow::cartAsChanged(int id){
+    if(currentCommand->contains(id)){
+        currentCommand->removeAll(id);
+    } else{
+        currentCommand->append(id);
+    }
+    updateLists();
 }
 
 void MainWindow::updateLists(){
@@ -170,35 +238,94 @@ void MainWindow::updateLists(){
     clearLayout(desertsLikedList);
     clearLayout(drinksLikedList);
 
+    clearLayout(commandList);
+
+    totalPrice = 0;
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        qWarning() << (*it)->getType();
+        if(currentCommand->contains((*it)->getId())){
+            commandList->addWidget(new MealItem(this,*it,true));
+            totalPrice+=(*it)->getPrice();
+        }
+
         switch ((*it)->getType()) {
         case 1:
-            if(!(*it)->getIsBanned()) startersList->addWidget(new MealItem(this,*it));
-            if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) startersLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 2:
-            if(!(*it)->getIsBanned()) dishesList->addWidget(new MealItem(this,*it));
-            if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) dishesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 3:
-            if(!(*it)->getIsBanned()) sidesList->addWidget(new MealItem(this,*it));
-            if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) sidesLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 4:
-            if(!(*it)->getIsBanned()) desertsList->addWidget(new MealItem(this,*it));
-            if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) desertsLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it,true));
             break;
         case 5:
-            if(!(*it)->getIsBanned()) drinksList->addWidget(new MealItem(this,*it));
-            if((*it)->getIsLiked()&&(!(*it)->getIsBanned())) drinksLikedList->addWidget(new MealItem(this,*it));
+            if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true));
+            if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it,true));
             break;
         }
     }
-
+    updateTotalPrice();
     update();
 }
 
+void MainWindow::updateTotalPrice(){
+    QString totalStr;
+    if(totalPrice<10)
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,4) + " ") +  QChar(0x20AC);
+    else
+    totalStr = QString::fromStdString(std::to_string(totalPrice).substr(0,5) + " ") +  QChar(0x20AC);
+
+    ui->totalTxt->setText(totalStr);
+}
+
+
+void MainWindow::updateMaxPrice(int value){
+QString str = QString::fromStdString(std::to_string((30+5*value)/10)+ "." + std::to_string(30+5*value-(30+5*value)/10*10)+ " ") + QChar(0x20AC);
+ui->maxPrice->setText(str);
+update();
+maximumPrice = 3 +0.5*value;
+}
+
+void MainWindow::updateSolde(double value){
+    double rounded = qRound(value * 100) / 100;
+    QString str;
+    if (rounded >=10)
+        str = QString::fromStdString(std::to_string(rounded).substr(0,5) + " ") +QChar(0x20AC);
+    else
+        str = QString::fromStdString(std::to_string(rounded).substr(0,4) + " ") +QChar(0x20AC);
+
+    ui->balanceTxt->setText(str);
+    update();
+}
+
+void MainWindow::updateFavFromBan(){
+    fw->updateLists();
+}
+
+void MainWindow::updateBanFromFav(){
+    bw->updateLists();
+}
+
+void MainWindow::command(){
+    if(currentUser->getSolde()>= this->totalPrice){
+    int val = confirmationBox->exec();
+    if(val ==1){
+    currentUser->removeSolde(totalPrice);
+    emit(soldeChanged(currentUser->getSolde()));
+    update();}}
+    else{
+    int val = rechargeBox->exec();
+    if (val == 1){
+        rw->show();
+        this->hide();    }
+    }
+}
 void MainWindow::exit()
 {
     close();

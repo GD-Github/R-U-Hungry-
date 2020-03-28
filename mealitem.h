@@ -8,7 +8,9 @@
 #include <QPushButton>
 #include <QIcon>
 #include <QDebug>
+#include <QCheckBox>
 #include "meal.h"
+#include "meal_window.h"
 
 /*
  Widget affichant les données d'un plat ( pour mettre dans une liste)
@@ -20,22 +22,22 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(QWidget* parent, Meal * item);
+    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false);
     Meal * getMeal() {return meal;}
+    bool getIsChecked(){return isChecked;}
 
 private:
-    QWidget * parent;
+    Meal_Window * parent;
     Meal * meal;
+    bool isChecked = false;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
 
-public slots:
-    void changeLiked();
-    void changeBanned();
 signals:
     void likedAsChanged();
     void bannedAsChanged();
+    void selectedChanged(int id);
 };
 
 #endif // MEALITEM_H

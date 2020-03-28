@@ -10,22 +10,35 @@
 #include <QJsonObject>
 #include <QVBoxLayout>
 #include <QVector>
+#include <QtGlobal>
 #include "meal.h"
 #include "mealitem.h"
+#include "user.h"
+#include "utils.h"
+#include "meal_window.h"
+#include"bannedwindow.h"
+#include"favoriteswindow.h"
+#include"rechargewindow.h"
+#include <QMessageBox>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWindow : public QMainWindow
+class MainWindow : public Meal_Window
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, QVector<Meal*> * m_availableMeal = nullptr);
+    MainWindow(User * currentUser = nullptr, QWidget *parent = nullptr );
+    User * getUser() {return currentUser;}
+    void updateLists();
     ~MainWindow();
 
 private:
+
+    QMessageBox * confirmationBox;
+    QMessageBox* rechargeBox;
     Ui::MainWindow *ui;
 
     void clearLayout(QVBoxLayout * layout);
@@ -42,14 +55,38 @@ private:
     QVBoxLayout * desertsList = nullptr;
     QVBoxLayout * drinksList = nullptr;
 
+    QVBoxLayout * commandList = nullptr;
+
     QVector<Meal*> * availableMeal;
+
+    QVector<int> * currentCommand;
+
+    User * currentUser;
+    FavoritesWindow* fw;
+    BannedWindow* bw;
+    RechargeWindow* rw;
+
+
+    double maximumPrice;
+    double totalPrice ;
 
 
 public slots:
-    void updateLists();
+    void updateSolde(double);
+    void updateMaxPrice(int);
     void rechargeBtnAction();
     void favoritesBtnAction();
     void bannedBtnAction();
     void exit();
+    void likedAsChanged(int id) override;
+    void bannedAsChanged(int id) override;
+    void cartAsChanged(int id) override;
+    void updateBanFromFav();
+    void updateFavFromBan();
+    void updateTotalPrice();
+    void command();
+
+signals:
+    void soldeChanged(double);
 };
 #endif // MAINWINDOW_H
