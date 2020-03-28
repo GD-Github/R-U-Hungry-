@@ -524,6 +524,7 @@ QScrollArea {
 
 #commandScrollArea QWidget {
 	background-color: rgb(235, 248, 255);
+	qproperty-alignment: 'AlignVCenter | AlignLeft';
 }
 
 QTabWidget QScrollArea {
@@ -551,7 +552,7 @@ QLineEdit {
 	font: 63 8pt &quot;Segoe UI Semibold&quot;;
 }
 
-QLabel {
+QLabel, QRadioButton, QCheckBox {
 	background-color: rgb(240, 235, 255);
 	border-radius: 3px;
 	color: rgb(85, 85, 127);
@@ -609,6 +610,7 @@ QScrollBar::handle:vertical {
 
 QMessageBox {
 	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(218, 240, 255);
 }
 
 QMessageBox QWidget {
@@ -620,6 +622,12 @@ QMessageBox QPushButton {
 	color: rgb(255, 255, 255);
 	min-width: 70px;
 	min-height: 30px;
+}
+
+#sortMenu, #filterMenu {
+	background-color: rgb(218, 208, 255);
+	border: 1px solid rgb(55, 55, 85);
+	border-radius: 4px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -1215,111 +1223,106 @@ QMessageBox QPushButton {
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>60</y>
-      <width>151</width>
-      <height>151</height>
+      <y>90</y>
+      <width>171</width>
+      <height>191</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">#sortMenu{
-background-color : qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255))
-}</string>
+     <string notr="true"/>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget_2">
+    <widget class="QRadioButton" name="sortCalDBtn">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
+       <x>10</x>
+       <y>110</y>
        <width>151</width>
-       <height>156</height>
+       <height>31</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QRadioButton" name="sortPriceCBtn">
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Prix croissant</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="sortPriceDBtn">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="text">
-         <string>Prix décroissant</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>5</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="sortCalCBtn">
-        <property name="text">
-         <string>kCal croissantes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="sortCalDBtn">
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>kCal décroissantes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <property name="spacing">
-         <number>6</number>
-        </property>
-        <item>
-         <widget class="QPushButton" name="dontSortBtn">
-          <property name="text">
-           <string>Annuler</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="sortBtn_2">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Trier</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-     <zorder>sortPriceCBtn</zorder>
-     <zorder>sortPriceDBtn</zorder>
-     <zorder>sortCalDBtn</zorder>
-     <zorder>sortCalCBtn</zorder>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>kCal décroissantes</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="sortCalCBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>80</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>kCal croissantes</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="sortPriceDBtn">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>40</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Prix décroissant</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="sortBtn_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>150</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Trier</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="dontSortBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>150</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Annuler</string>
+     </property>
+    </widget>
+    <widget class="QRadioButton" name="sortPriceCBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>151</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
+     <property name="text">
+      <string>Prix croissant</string>
+     </property>
     </widget>
    </widget>
    <widget class="QFrame" name="filterMenu">
@@ -1328,102 +1331,98 @@ background-color : qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rg
     </property>
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>60</y>
-      <width>151</width>
-      <height>151</height>
+      <x>10</x>
+      <y>90</y>
+      <width>171</width>
+      <height>211</height>
      </rect>
     </property>
     <property name="autoFillBackground">
      <bool>false</bool>
     </property>
     <property name="styleSheet">
-     <string notr="true">#filterMenu{
-background-color : qradialgradient(spread:repeat, cx:0.5, cy:0.5, radius:0.077, fx:0.5, fy:0.5, stop:0 rgba(0, 169, 255, 147), stop:0.497326 rgba(0, 0, 0, 147), stop:1 rgba(0, 169, 255, 147))
-}</string>
+     <string notr="true"/>
     </property>
-    <widget class="QWidget" name="verticalLayoutWidget_3">
+    <widget class="QCheckBox" name="halalBox">
      <property name="geometry">
       <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>151</width>
-       <height>161</height>
+       <x>10</x>
+       <y>130</y>
+       <width>149</width>
+       <height>31</height>
       </rect>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Fixed</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>1</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="vegetarianBox">
-        <property name="text">
-         <string>Végétarien</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="glutenFreeBox">
-        <property name="text">
-         <string>Sans Gluten</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="allergenFreeBox">
-        <property name="text">
-         <string>Sans Allergènes</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="halalBox">
-        <property name="text">
-         <string>Halal</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <property name="spacing">
-         <number>6</number>
-        </property>
-        <property name="sizeConstraint">
-         <enum>QLayout::SetDefaultConstraint</enum>
-        </property>
-        <item>
-         <widget class="QPushButton" name="dontFilterBtn">
-          <property name="text">
-           <string>Annuler</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="filterBtn_2">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="text">
-           <string>Filtrer</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <property name="text">
+      <string>Halal</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="allergenFreeBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>149</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sans Allergènes</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="glutenFreeBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>50</y>
+       <width>149</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Sans Gluten</string>
+     </property>
+    </widget>
+    <widget class="QCheckBox" name="vegetarianBox">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
+       <width>149</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Végétarien</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="dontFilterBtn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>170</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Annuler</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="filterBtn_2">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>170</y>
+       <width>71</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Filtrer</string>
+     </property>
     </widget>
    </widget>
   </widget>

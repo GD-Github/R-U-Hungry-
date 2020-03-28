@@ -87,6 +87,7 @@ QSlider::handle {
 
 QMessageBox {
 	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(218, 240, 255);
 }
 
 QMessageBox QWidget {

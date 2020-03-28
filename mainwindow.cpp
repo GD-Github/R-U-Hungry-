@@ -15,7 +15,6 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     confirmationBox = new QMessageBox(this);
     confirmationBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
 
-    //confirmationBox->setAttribute(Qt::WA_TranslucentBackground);
     confirmationBox->setIcon(QMessageBox::Warning);
     confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
     confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
@@ -39,7 +38,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     tooExpansiveBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
     tooExpansiveBox->addButton(nonBtn,QMessageBox::NoRole);
     tooExpansiveBox->addButton(ouiBtn,QMessageBox::YesRole);
-    tooExpansiveBox->setText(QString("Si vous selectionnez cet item, le prix de votre commande dépassera le prix maximum que vous avez fixé. Continuez ?"));
+    tooExpansiveBox->setText(QString("Si vous selectionnez cet item, le prix de votre commande dépassera le prix maximal que vous avez fixé. Êtes-vous sûr(e) de vouloir continuer ?"));
     tooExpansiveBox->setWindowTitle(QString("Oups !"));
 
 
