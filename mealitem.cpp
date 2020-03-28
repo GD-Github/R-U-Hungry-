@@ -1,18 +1,21 @@
 #include "mealitem.h"
 
-MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn) :QWidget()
+MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn, bool isChecked) :QWidget()
 {
     this->hasBannedBtn = hasBannedBtn;
     this->hasFavoriteBtn = hasFavoriteBtn;
     this->parent = parent;
     this->meal = item;
+    this->isChecked = isChecked;
     QHBoxLayout *layout = new QHBoxLayout;
 
     if(canBeChecked){
-        QCheckBox * addToCart = new QCheckBox();
+        addToCart = new QCheckBox();
+        if(isChecked)
+            addToCart->setChecked(true);
         layout->addWidget(addToCart);
         connect(addToCart,&QCheckBox::stateChanged,[=]{
-            isChecked = !isChecked;
+            this->isChecked = !this->isChecked;
             parent->cartAsChanged(this->meal->getId());});
     }
     layout->addWidget(new QLabel(item->getName()));
