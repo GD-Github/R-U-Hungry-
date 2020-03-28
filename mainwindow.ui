@@ -636,7 +636,7 @@ QMessageBox QPushButton {
      </rect>
     </property>
     <property name="text">
-     <string>3 €</string>
+     <string>5 €</string>
     </property>
    </widget>
    <widget class="QSlider" name="maxPriceSlider">
@@ -653,6 +653,9 @@ QMessageBox QPushButton {
     </property>
     <property name="maximum">
      <number>14</number>
+    </property>
+    <property name="value">
+     <number>4</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>

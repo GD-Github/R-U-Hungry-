@@ -9,7 +9,6 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    totalPrice = 3;
 
     QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
     QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
@@ -32,6 +31,17 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     rechargeBox->addButton(rechargeBtn,QMessageBox::YesRole);
     rechargeBox->setText(QString("Vous n'avez pas assez d'argent, voulez vous recharger?"));
     rechargeBox->setWindowTitle(QString("Oups !"));
+
+    QPushButton* ouiBtn = new QPushButton(tr("Oui"),this);
+    QPushButton* nonBtn = new QPushButton(tr("Non"),this);
+    tooExpansiveBox = new QMessageBox(this);
+    tooExpansiveBox->setIcon(QMessageBox::Warning);
+    tooExpansiveBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
+    tooExpansiveBox->addButton(nonBtn,QMessageBox::NoRole);
+    tooExpansiveBox->addButton(ouiBtn,QMessageBox::YesRole);
+    tooExpansiveBox->setText(QString("Si vous selectionnez cet item, le prix de votre commande dépassera le prix maximum que vous avez fixé. Continuez ?"));
+    tooExpansiveBox->setWindowTitle(QString("Oups !"));
+
 
     connect(ui->rechargeBtn,SIGNAL(clicked()),this,SLOT(rechargeBtnAction()));
     connect(ui->favoritesBtn,SIGNAL(clicked()),this,SLOT(favoritesBtnAction()));
@@ -281,11 +291,34 @@ void MainWindow::updateLists(){
     clearLayout(commandList);
 
     totalPrice = 0;
-    for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
-        if(currentCommand->contains((*it)->getId())){
-            commandList->addWidget(new MealItem(this,*it,true,false,false));
-            totalPrice+=(*it)->getPrice();
+
+    for(int i = 0;i < currentCommand->size();i++)  {
+    int selectedItem = currentCommand->at(i);
+    Meal* meal = availableMeal->at(selectedItem-1);
+    if(totalPrice+ meal->getPrice() < maximumPrice){
+    commandList->addWidget(new MealItem(this,meal,true,false,false));
+    totalPrice+=meal->getPrice();            }
+    else{
+        if(i == currentCommand->size()-1){
+        int val = tooExpansiveBox->exec();
+        if(val ==0)
+        {
+            currentCommand->remove(i);
         }
+        else{
+        commandList->addWidget(new MealItem(this,meal,true,false,false));
+        totalPrice+= meal->getPrice();    }}
+        else{
+            commandList->addWidget(new MealItem(this,meal,true,false,false));
+            totalPrice+= meal->getPrice();
+        }
+
+    }
+
+    }
+
+    for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
+
 
         switch ((*it)->getType()) {
         case 1:
@@ -333,12 +366,12 @@ maximumPrice = 3 +0.5*value;
 }
 
 void MainWindow::updateSolde(double value){
-    double rounded = qRound(value * 100) / 100;
+    double rounded = qRound(value * 100);
     QString str;
-    if (rounded >=10)
-        str = QString::fromStdString(std::to_string(rounded).substr(0,5) + " ") +QChar(0x20AC);
+    if (rounded >=1000)
+        str = QString::fromStdString(std::to_string(rounded).substr(0,2) + "." + std::to_string(rounded).substr(2,2) + " ") +QChar(0x20AC);
     else
-        str = QString::fromStdString(std::to_string(rounded).substr(0,4) + " ") +QChar(0x20AC);
+        str = QString::fromStdString(std::to_string(rounded).substr(0,1) + "." + std::to_string(rounded).substr(1,2) +" ") +QChar(0x20AC);
 
     ui->balanceTxt->setText(str);
     update();
@@ -367,6 +400,8 @@ void MainWindow::command(){
         rw->show();
         this->hide();    }
     }
+    currentCommand->clear();
+    updateLists();
 }
 void MainWindow::exit()
 {

@@ -39,6 +39,8 @@ private:
 
     QMessageBox * confirmationBox;
     QMessageBox* rechargeBox;
+    QMessageBox* tooExpansiveBox;
+
     Ui::MainWindow *ui;
 
     void clearLayout(QVBoxLayout * layout);
@@ -67,7 +69,7 @@ private:
     RechargeWindow* rw;
 
 
-    double maximumPrice;
+    double maximumPrice = 5;
     double totalPrice ;
 
 
