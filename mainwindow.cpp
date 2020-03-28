@@ -198,16 +198,20 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     availableMeal = new QVector<Meal*>();
     priceMealC = new QVector<Meal*>();
     priceMealDc = new QVector<Meal*>();
+    kCalMealC = new QVector<Meal*>();
+    kCalMealDc = new QVector<Meal*>();
     finalMeal = new QVector<Meal*>();
 
     Utils::readMealFromIndexFile("availableMeal.txt",availableMeal);
 
 
     std::vector<std::pair<double,int>> mealsPrice;
+    std::vector<std::pair<double,int>> mealsKCal;
 
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
 
         mealsPrice.push_back(std::pair<double,int> {(*it)->getPrice(),(*it)->getId()});
+        mealsKCal.push_back(std::pair<int,int>{(*it)->getkCal(),(*it)->getId()});
     }
 
 
@@ -226,11 +230,22 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     for (uint i = 0; i< mealsPrice.size(); i++){
         priceMealC->push_back(availableMeal->at(mealsPrice.at(i).second-1));
     }
+
     std::sort(mealsPrice.begin(), mealsPrice.end(), decroissant);
     for (uint i = 0; i< mealsPrice.size(); i++){
         priceMealDc->push_back(availableMeal->at(mealsPrice.at(i).second-1));
     }
     finalMeal = availableMeal;
+
+    std::sort(mealsKCal.begin(),mealsKCal.end(),croissant);
+    for (uint i = 0; i< mealsKCal.size(); i++){
+        kCalMealC->push_back((availableMeal->at(mealsKCal.at(i).second-1)));
+    }
+
+    std::sort(mealsKCal.begin(),mealsKCal.end(),decroissant);
+    for (uint i = 0; i< mealsKCal.size(); i++){
+        kCalMealDc->push_back((availableMeal->at(mealsKCal.at(i).second-1)));
+    }
 
     updateTotalPrice();
     updateLists();
@@ -493,6 +508,8 @@ void MainWindow::displaySortMenu(){
 void MainWindow::sort(){
     if (sortGroup->checkedId() == 0) finalMeal = priceMealC;
     if(sortGroup->checkedId() ==1) finalMeal = priceMealDc;
+    if(sortGroup->checkedId() ==2) finalMeal = kCalMealC;
+    if(sortGroup->checkedId() ==3) finalMeal = kCalMealDc;
     ui->sortMenu->hide();
     updateLists();
 }

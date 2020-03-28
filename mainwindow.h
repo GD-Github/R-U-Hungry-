@@ -63,6 +63,8 @@ private:
     QVector<Meal*> * availableMeal;
     QVector<Meal*> * priceMealC;
     QVector<Meal*> * priceMealDc;
+    QVector<Meal*> * kCalMealC;
+    QVector<Meal*> * kCalMealDc;
     QVector<Meal*> * finalMeal;
     QButtonGroup* sortGroup;
 

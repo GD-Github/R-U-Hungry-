@@ -15,6 +15,7 @@ public:
     int getId() {return id;}
     QString getName() {return name;}
     float getPrice() {return price;}
+    int getkCal(){return kCal;}
     bool getIsVegetarian() {return isVegetarian;}
     bool getContainAllergene() {return containAllergene;}
     int getType() {return type;}

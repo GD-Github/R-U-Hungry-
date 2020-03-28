@@ -1,5 +1,5 @@
 #include "utils.h"
-
+#include <iostream>
 void Utils::readMealFromJson(QVector<Meal*>* allMeal){
     QString json_string;
     QFile file;
@@ -12,7 +12,7 @@ void Utils::readMealFromJson(QVector<Meal*>* allMeal){
     QJsonArray jsonArray = doc.array();
     for(auto it = jsonArray.begin() ; it!=jsonArray.end() ; ++it){
         QJsonObject mealObject = it->toObject();
-        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),mealObject["kCal"].toInt(),false,false));
+        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),mealObject["kcal"].toInt(),false,false));
     }
 }
 
