@@ -22,10 +22,10 @@ BannedWindow::BannedWindow(User * currentUser, QWidget *parent) :
     QScrollArea * mealBannedScrollArea = ui->bannedMealArea;
     mealBannedScrollArea->setVerticalScrollBarPolicy( Qt::ScrollBarAlwaysOn );
     mealBannedScrollArea->setWidgetResizable( true );
-
     QWidget *widget = new QWidget();
     mealBannedScrollArea->setWidget( widget );
     mealBannedList = new QVBoxLayout();
+    mealBannedList->setAlignment(Qt::AlignTop);
     widget->setLayout( mealBannedList );
 
     updateLists();

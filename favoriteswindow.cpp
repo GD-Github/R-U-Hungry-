@@ -27,6 +27,7 @@ FavoritesWindow::FavoritesWindow(User * currentUser, QWidget *parent) :
     QWidget *widget = new QWidget();
     mealLikedScrollArea->setWidget( widget );
     mealLikedList = new QVBoxLayout();
+    mealLikedList->setAlignment(Qt::AlignTop);
     widget->setLayout( mealLikedList );
 
     updateLists();
