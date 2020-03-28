@@ -22,7 +22,7 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false);
+    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false, bool hasFavoriteBtn = true, bool hasBannedBtn = true);
     Meal * getMeal() {return meal;}
     bool getIsChecked(){return isChecked;}
 
@@ -30,6 +30,8 @@ private:
     Meal_Window * parent;
     Meal * meal;
     bool isChecked = false;
+    bool hasFavoriteBtn = true;
+    bool hasBannedBtn = true;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

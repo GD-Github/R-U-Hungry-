@@ -78,7 +78,7 @@ void FavoritesWindow::updateLists(){
     }
 
     for(auto it=allMeal->begin() ; it!=allMeal->end() ; ++it){
-        if(currentUser->favoritesContain((*it)->getId())) mealLikedList->addWidget(new MealItem(this,*it));
+        if(currentUser->favoritesContain((*it)->getId())) mealLikedList->addWidget(new MealItem(this,*it,false,true,false));
     }
 
     update();

@@ -75,7 +75,7 @@ void BannedWindow::updateLists(){
     }
 
     for(auto it=allMeal->begin() ; it!=allMeal->end() ; ++it){
-        if(currentUser->bannedContain((*it)->getId())) mealBannedList->addWidget(new MealItem(this,*it));
+        if(currentUser->bannedContain((*it)->getId())) mealBannedList->addWidget(new MealItem(this,*it,false,false,true));
     }
 
     update();

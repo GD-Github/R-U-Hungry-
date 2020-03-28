@@ -244,7 +244,7 @@ void MainWindow::updateLists(){
     totalPrice = 0;
     for(auto it=availableMeal->begin() ; it!=availableMeal->end() ; ++it){
         if(currentCommand->contains((*it)->getId())){
-            commandList->addWidget(new MealItem(this,*it,true));
+            commandList->addWidget(new MealItem(this,*it,true,false,false));
             totalPrice+=(*it)->getPrice();
         }
 
