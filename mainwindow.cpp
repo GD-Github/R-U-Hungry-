@@ -165,6 +165,8 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     updateTotalPrice();
     updateLists();
     updateSolde(currentUser->getSolde());
+    fw->setAllMeal(availableMeal);
+    bw->setAllMeal(availableMeal);
 
 }
 
@@ -183,12 +185,16 @@ void MainWindow::rechargeBtnAction()
 
 void MainWindow::favoritesBtnAction()
 {
-    fw->show();
+    fw->updateLists();
+    bw->updateLists();
+    fw->show();    
     this->hide();
 }
 
 void MainWindow::bannedBtnAction()
 {
+    bw->updateLists();
+    fw->updateLists();
     bw->show();
     this->hide();
 }
@@ -201,17 +207,40 @@ void MainWindow::clearLayout(QVBoxLayout * layout){
     }
 }
 
+Meal* MainWindow::getMeal(int id){
+    for (int i=0; i<availableMeal->length();i++){
+        if ((availableMeal->at(i))->getId()==id){
+            return availableMeal->at(i);
+        }
+    }
+    return availableMeal->at(0);
+}
+
 void MainWindow::likedAsChanged(int id) {
-    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
-    else currentUser->addFavorite(id);
+    Meal* selected_meal = getMeal(id);
+    if(currentUser->favoritesContain(id)){
+        currentUser->removeFavorite(id);
+        selected_meal->setIsFavorite(false);
+    }
+    else {
+        currentUser->addFavorite(id);
+        selected_meal->setIsFavorite(true);
+    }
     updateLists();
     fw->updateLists();
 
 }
 
 void MainWindow::bannedAsChanged(int id){
-    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
-    else currentUser->addBanned(id);
+    Meal* selected_meal = getMeal(id);
+    if(currentUser->bannedContain(id)){
+        selected_meal->setIsBanned(false);
+        currentUser->removeBanned(id);
+    }
+    else{
+        selected_meal->setIsBanned(true);
+        currentUser->addBanned(id);
+    }
     updateLists();
     bw->updateLists();
 

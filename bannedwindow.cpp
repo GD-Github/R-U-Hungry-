@@ -38,6 +38,7 @@ BannedWindow::~BannedWindow()
 
 void BannedWindow::homeBtnAction()
 {
+    updateLists();
     parentWidget()->show();
     this->hide();
 }
@@ -49,20 +50,44 @@ void BannedWindow::exit()
 
 void BannedWindow::favoritesBtnAction()
 {
+    updateLists();
     fw->show();
     this->hide();
 }
 
+Meal* BannedWindow::getMeal(int id){
+    for (int i=0; i<allMeal->length();i++){
+        if ((allMeal->at(i))->getId()==id){
+            return allMeal->at(i);
+        }
+    }
+    return allMeal->at(0);
+}
+
 void BannedWindow::likedAsChanged(int id){
-    if(currentUser->favoritesContain(id)) currentUser->removeFavorite(id);
-    else currentUser->addFavorite(id);
+    Meal* selected_meal = getMeal(id);
+    if(currentUser->favoritesContain(id)){
+        currentUser->removeFavorite(id);
+        selected_meal->setIsFavorite(false);
+    }
+    else{
+        currentUser->addFavorite(id);
+        selected_meal->setIsFavorite(true);
+    }
     updateLists();
     emit(updateFav());
 }
 
 void BannedWindow::bannedAsChanged(int id){
-    if(currentUser->bannedContain(id)) currentUser->removeBanned(id);
-    else currentUser->addBanned(id);
+    Meal* selected_meal = getMeal(id);
+    if(currentUser->bannedContain(id)){
+        currentUser->removeBanned(id);
+        selected_meal->setIsBanned(false);
+    }
+    else{
+        currentUser->addBanned(id);
+        selected_meal->setIsBanned(true);
+    }
     updateLists();
 }
 

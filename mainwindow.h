@@ -85,6 +85,7 @@ public slots:
     void updateFavFromBan();
     void updateTotalPrice();
     void command();
+    Meal* getMeal(int id);
 
 signals:
     void soldeChanged(double);

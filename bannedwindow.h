@@ -23,6 +23,8 @@ public:
     ~BannedWindow();
     void updateLists();
     void setFw(QMainWindow* fw){this->fw = fw;}
+    Meal* getMeal(int id);
+    void setAllMeal( QVector<Meal*> * new_meals){ allMeal=new_meals;}
 
 private:
     Ui::BannedWindow *ui;

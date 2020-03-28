@@ -21,7 +21,7 @@ User::User(QString name) : name(name)
         if(value!=QJsonValue::Undefined){
             solde = value.toDouble();
         }
-        value = user.value("liked");
+        /*value = user.value("liked");
         if(value!=QJsonValue::Undefined){
             QJsonArray likedArray = value.toArray();
             for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
@@ -34,7 +34,7 @@ User::User(QString name) : name(name)
             for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
                 bannedMeal->append(it->toInt());
             }
-        }
+        }*/
 
     }
 }

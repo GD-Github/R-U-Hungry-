@@ -4,6 +4,8 @@
         <file>heart.png</file>
         <file>home.png</file>
         <file>warning.png</file>
+        <file>empty_heart.png</file>
+        <file>empty_banned.png</file>
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>

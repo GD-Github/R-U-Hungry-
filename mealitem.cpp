@@ -19,14 +19,23 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     layout->addWidget(new QLabel(item->getName()));
     layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)));
 
-
     if(this->hasFavoriteBtn){
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
+    if(item->getFavorite()==false){
+        likeButton->setIcon(QIcon(":/icons/empty_heart.png"));
+    }else{
+        likeButton->setIcon(QIcon(":/icons/heart.png"));
+    }
     layout->addWidget(likeButton);
     connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getId() ); });
     }
     if(this->hasBannedBtn){
     QPushButton * bannedButton = new QPushButton(QIcon(":/icons/banned.png"),"",this);
+    if(item->getBanned()==false){
+        bannedButton->setIcon(QIcon(":/icons/empty_banned.png"));
+    }else{
+        bannedButton->setIcon(QIcon(":/icons/banned.png"));
+    }
     layout->addWidget(bannedButton);
     connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
     }
