@@ -20,7 +20,7 @@ RechargeWindow::RechargeWindow(User * currentUser, QWidget *parent) :
 
     confirmationBox = new QMessageBox(this);
     confirmationBox->setIcon(QMessageBox::Warning);
-    confirmationBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    confirmationBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
 
     confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
     confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);

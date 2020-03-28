@@ -496,6 +496,21 @@ QPushButton:hover {
 	color: rgb(102, 102, 155);
 }
 
+QTabWidget QPushButton {
+	border: 1px solid rgb(102, 102, 155);
+	border-radius: 11px;
+	max-width: 22px;
+	min-height: 22px;
+}
+
+QTabWidget QPushButton:hover {
+	background-color: rgb(218, 208, 255);
+}
+
+QTabWidget QLabel {
+	qproperty-alignment: 'AlignVCenter | AlignLeft';
+}
+
 #filterGrpBx {
 	background-color: rgb(235, 248, 255);
 	border: 2px solid rgb(218, 240, 255);
@@ -507,7 +522,7 @@ QScrollArea {
 	border-radius: 6px;
 }
 
-#scrollAreaWidgetContents  {
+#commandScrollArea QWidget {
 	background-color: rgb(235, 248, 255);
 }
 
@@ -590,6 +605,21 @@ QScrollBar::handle:vertical {
 	border: 1px solid rgb(85, 85, 127);
 	border-radius: 4px;
 	background-color: rgb(218, 240, 255);
+}
+
+QMessageBox {
+	background-color: rgb(218, 208, 255);
+}
+
+QMessageBox QWidget {
+	background-color: transparent;
+}
+
+QMessageBox QPushButton {
+	background-color: rgb(85, 85, 127);
+	color: rgb(255, 255, 255);
+	min-width: 70px;
+	min-height: 30px;
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">

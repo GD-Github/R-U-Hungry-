@@ -14,8 +14,9 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
     QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
     confirmationBox = new QMessageBox(this);
-    confirmationBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    confirmationBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
 
+    //confirmationBox->setAttribute(Qt::WA_TranslucentBackground);
     confirmationBox->setIcon(QMessageBox::Warning);
     confirmationBox->addButton(cancelBtn,QMessageBox::NoRole);
     confirmationBox->addButton(confirmBtn,QMessageBox::YesRole);
@@ -26,7 +27,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     QPushButton* rechargeBtn = new QPushButton(tr("Recharger"),this);
     rechargeBox = new QMessageBox(this);
     rechargeBox->setIcon(QMessageBox::Warning);
-    rechargeBox->setWindowFlags(Qt::Dialog | Qt::CustomizeWindowHint | Qt::WindowTitleHint | Qt::WindowCloseButtonHint);
+    rechargeBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
     rechargeBox->addButton(cancelBtn2,QMessageBox::NoRole);
     rechargeBox->addButton(rechargeBtn,QMessageBox::YesRole);
     rechargeBox->setText(QString("Vous n'avez pas assez d'argent, voulez vous recharger?"));

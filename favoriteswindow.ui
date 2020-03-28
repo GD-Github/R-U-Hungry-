@@ -54,10 +54,17 @@ QPushButton:hover {
 	color: rgb(102, 102, 155);
 }
 
-#favoritesGrpBx {
-	background-color: rgb(235, 248, 255);
+QScrollArea {
 	border: 2px solid rgb(218, 240, 255);
 	border-radius: 6px;
+}
+
+#favoriteMealArea QWidget {
+	background-color: rgb(235, 248, 255);
+}
+
+#favoriteMealArea QLabel {
+	qproperty-alignment: 'AlignVCenter | AlignLeft';
 }
 
 QLabel {
@@ -66,6 +73,17 @@ QLabel {
 	color: rgb(85, 85, 127);
 	qproperty-alignment: AlignCenter;
 	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+}
+
+#favoriteMealArea QPushButton {
+	border: 1px solid rgb(102, 102, 155);
+	border-radius: 11px;
+	max-width: 22px;
+	min-height: 22px;
+}
+
+#favoriteMealArea QPushButton:hover {
+	background-color: rgb(218, 208, 255);
 }</string>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -184,7 +202,7 @@ QLabel {
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>70</y>
+      <y>90</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -210,8 +228,8 @@ QLabel {
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>459</width>
-       <height>439</height>
+       <width>457</width>
+       <height>437</height>
       </rect>
      </property>
     </widget>
