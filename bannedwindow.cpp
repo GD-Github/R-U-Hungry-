@@ -88,6 +88,7 @@ void BannedWindow::bannedAsChanged(int id){
         currentUser->addBanned(id);
         selected_meal->setIsBanned(true);
     }
+    emit(updateFav());
     updateLists();
 }
 

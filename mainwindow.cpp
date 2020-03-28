@@ -345,10 +345,12 @@ void MainWindow::updateSolde(double value){
 }
 
 void MainWindow::updateFavFromBan(){
+    this->updateLists();
     fw->updateLists();
 }
 
 void MainWindow::updateBanFromFav(){
+    this->updateLists();
     bw->updateLists();
 }
 
