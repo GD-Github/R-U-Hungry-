@@ -20,6 +20,7 @@
 #include"favoriteswindow.h"
 #include"rechargewindow.h"
 #include <QMessageBox>
+#include<QButtonGroup>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -60,6 +61,10 @@ private:
     QVBoxLayout * commandList = nullptr;
 
     QVector<Meal*> * availableMeal;
+    QVector<Meal*> * priceMealC;
+    QVector<Meal*> * priceMealDc;
+    QVector<Meal*> * finalMeal;
+    QButtonGroup* sortGroup;
 
     QVector<int> * currentCommand;
 
@@ -87,6 +92,9 @@ public slots:
     void updateFavFromBan();
     void updateTotalPrice();
     void command();
+    void displaySortMenu();
+    void sort();
+    void cancelSort();
     Meal* getMeal(int id);
 
 signals:
