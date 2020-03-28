@@ -13,13 +13,13 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
         addToCart = new QCheckBox();
         if(isChecked)
             addToCart->setChecked(true);
-        layout->addWidget(addToCart);
+        layout->addWidget(addToCart, 1);
         connect(addToCart,&QCheckBox::stateChanged,[=]{
             this->isChecked = !this->isChecked;
             parent->cartAsChanged(this->meal->getId());});
     }
-    layout->addWidget(new QLabel(item->getName()));
-    layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)));
+    layout->addWidget(new QLabel(item->getName()), 8);
+    layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)), 2);
 
     if(this->hasFavoriteBtn){
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
@@ -28,7 +28,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     }else{
         likeButton->setIcon(QIcon(":/icons/heart.png"));
     }
-    layout->addWidget(likeButton);
+    layout->addWidget(likeButton, 1);
     connect(likeButton, &QPushButton::clicked, [=]{ parent->likedAsChanged(this->meal->getId() ); });
     }
     if(this->hasBannedBtn){
@@ -38,7 +38,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     }else{
         bannedButton->setIcon(QIcon(":/icons/banned.png"));
     }
-    layout->addWidget(bannedButton);
+    layout->addWidget(bannedButton, 1);
     connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
     }
     this->setLayout(layout);
