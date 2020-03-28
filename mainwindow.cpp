@@ -325,47 +325,47 @@ void MainWindow::updateLists(){
         switch ((*it)->getType()) {
         case 1:
             if(currentCommand->contains((*it)->getId())){
-             if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true,true,true,true));
+             if(!currentUser->bannedContain((*it)->getId()) && !currentUser->favoritesContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true,true,true,true));
              if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it,true,true,true,true));
             }
             else{
-            if(!currentUser->bannedContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true));
+            if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) startersList->addWidget(new MealItem(this,*it,true));
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) startersLikedList->addWidget(new MealItem(this,*it,true));}
             break;
         case 2:
             if(currentCommand->contains((*it)->getId())){
-                if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true,true,true,true));
+                if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true,true,true,true));
                 if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it,true,true,true,true));
             }
             else{
-            if(!currentUser->bannedContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true));
+            if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) dishesList->addWidget(new MealItem(this,*it,true));
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) dishesLikedList->addWidget(new MealItem(this,*it,true));}
             break;
         case 3:
             if(currentCommand->contains((*it)->getId())){
-                if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true,true,true,true));
+                if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true,true,true,true));
                 if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it,true,true,true,true));
             }
             else{
-            if(!currentUser->bannedContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true));
+            if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) sidesList->addWidget(new MealItem(this,*it,true));
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) sidesLikedList->addWidget(new MealItem(this,*it,true));}
             break;
         case 4:
             if(currentCommand->contains((*it)->getId())){
-                if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true,true,true,true));
+                if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true,true,true,true));
                 if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it,true,true,true,true));
             }
             else{
-            if(!currentUser->bannedContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true));
+            if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) desertsList->addWidget(new MealItem(this,*it,true));
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) desertsLikedList->addWidget(new MealItem(this,*it,true));}
             break;
         case 5:
             if(currentCommand->contains((*it)->getId())){
-                if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true,true,true,true));
+                if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true,true,true,true));
                 if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it,true,true,true,true));
             }
             else{
-            if(!currentUser->bannedContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true));
+            if(!currentUser->bannedContain((*it)->getId())&& !currentUser->favoritesContain((*it)->getId())) drinksList->addWidget(new MealItem(this,*it,true));
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))) drinksLikedList->addWidget(new MealItem(this,*it,true));}
             break;
         }
