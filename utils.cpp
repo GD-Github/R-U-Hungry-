@@ -12,7 +12,7 @@ void Utils::readMealFromJson(QVector<Meal*>* allMeal){
     QJsonArray jsonArray = doc.array();
     for(auto it = jsonArray.begin() ; it!=jsonArray.end() ; ++it){
         QJsonObject mealObject = it->toObject();
-        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),false,false));
+        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),mealObject["kCal"].toInt(),false,false));
     }
 }
 
