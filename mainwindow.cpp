@@ -403,7 +403,16 @@ void MainWindow::cartAsChanged(int id){
     if(currentCommand->contains(id)){
         currentCommand->removeAll(id);
     } else{
-        currentCommand->append(id);
+        std::cout << id << std ::endl;
+
+        if(totalPrice+ availableMeal->at(id-1)->getPrice() > maximumPrice){
+            int val = tooExpansiveBox->exec();
+            if(val ==0){}
+            else{currentCommand->append(id);
+            }
+        }
+        else{
+        currentCommand->append(id);}
     }
     updateLists();
 }
@@ -429,25 +438,8 @@ void MainWindow::updateLists(){
         //add the price to Total and checks if it is higher than the maxPrice
     int selectedItem = currentCommand->at(i);
     Meal* meal = availableMeal->at(selectedItem-1);
-    if(totalPrice+ meal->getPrice() < maximumPrice){
     commandList->addWidget(new MealItem(this,meal,true,false,false,true));
-    totalPrice+=meal->getPrice();            }
-    else{
-        if(i == currentCommand->size()-1){
-        int val = tooExpansiveBox->exec();
-        if(val ==0)
-        {
-            currentCommand->remove(i);
-        }
-        else{
-        commandList->addWidget(new MealItem(this,meal,true,false,false,true));
-        totalPrice+= meal->getPrice();    }}
-        else{
-            commandList->addWidget(new MealItem(this,meal,true,false,false,true));
-            totalPrice+= meal->getPrice();
-        }
-
-    }
+    totalPrice+=meal->getPrice();
 
 }
 
