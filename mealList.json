@@ -5,7 +5,11 @@
         "type":2,
         "price":3.54,
 	"kcal":267,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":2,
@@ -13,7 +17,11 @@
         "type":2,
         "price":2.66,
 	"kcal":114,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":3,
@@ -21,7 +29,11 @@
         "type":2,
         "price":2.17,
 	"kcal":298,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":4,
@@ -29,15 +41,23 @@
         "type":2,
         "price":4.03,
 	"kcal":237,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":5,
-        "name":"Sole",
+        "name":"Côte de porc",
         "type":2,
         "price":204,
 	"kcal":267,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":false,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":6,
@@ -45,7 +65,11 @@
         "type":2,
         "price":3.37,
 	"kcal":270,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":7,
@@ -53,7 +77,11 @@
         "type":2,
         "price":2.41,
 	"kcal":183,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":8,
@@ -61,7 +89,11 @@
         "type":2,
         "price":2.78,
 	"kcal":198,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":9,
@@ -69,7 +101,11 @@
         "type":2,
         "price":2.85,
 	"kcal":344,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":10,
@@ -77,7 +113,11 @@
         "type":2,
         "price":1.95,
 	"kcal":304,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":11,
@@ -85,7 +125,11 @@
         "type":2,
         "price":2.58,
 	"kcal":410,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":false,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":12,
@@ -93,7 +137,11 @@
         "type":2,
         "price":2.41,
 	"kcal":297,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":13,
@@ -101,7 +149,11 @@
         "type":3,
         "price":0.3,
 	"kcal":45,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":14,
@@ -109,7 +161,11 @@
         "type":3,
         "price":0.3,
 	"kcal":97,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":15,
@@ -117,7 +173,11 @@
         "type":3,
         "price":0.3,
 	"kcal":38,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":16,
@@ -125,7 +185,11 @@
         "type":3,
         "price":0.3,
 	"kcal":35,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":17,
@@ -133,7 +197,11 @@
         "type":3,
         "price":0.3,
 	"kcal":51,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":18,
@@ -141,7 +209,11 @@
         "type":4,
         "price":0.8,
 	"kcal":37,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":19,
@@ -149,7 +221,11 @@
         "type":4,
         "price":1.1,
 	"kcal":184,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":20,
@@ -157,7 +233,11 @@
         "type":4,
         "price":0.45,
 	"kcal":49,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":21,
@@ -165,7 +245,11 @@
         "type":4,
         "price":0.96,
 	"kcal":79,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":22,
@@ -173,7 +257,11 @@
         "type":5,
         "price":1.10,
 	"kcal":47,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":false,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":23,
@@ -181,7 +269,11 @@
         "type":5,
         "price":1.42,
 	"kcal":74,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":false,
+        "aller":true,
+        "gluten":false
     },
     {
         "id":24,
@@ -189,7 +281,11 @@
         "type":5,
         "price":0.84,
 	"kcal":18,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":25,
@@ -197,7 +293,11 @@
         "type":5,
         "price":1.04,
 	"kcal":67,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":26,
@@ -205,7 +305,11 @@
         "type":1,
         "price":1.14,
 	"kcal":93,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":27,
@@ -213,7 +317,11 @@
         "type":1,
         "price":1.47,
 	"kcal":147,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":28,
@@ -221,7 +329,11 @@
         "type":1,
         "price":0.84,
 	"kcal":104,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":false,
+        "gluten":true
     },
     {
         "id":29,
@@ -229,7 +341,11 @@
         "type":1,
         "price":0.41,
 	"kcal":68,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":30,
@@ -237,7 +353,11 @@
         "type":1,
         "price":0.53,
 	"kcal":41,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     },
     {
         "id":31,
@@ -245,6 +365,10 @@
         "type":1,
         "price":0.71,
 	"kcal":48,
-        "description":"Une description"
+        "description":"Une description",
+        "vege":true,
+        "halal":true,
+        "aller":true,
+        "gluten":true
     }
 ]

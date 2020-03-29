@@ -278,24 +278,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::delVegeFilter(){
     ui->vegeFilter->hide();
+    ui->vegetarianBox->setChecked(false);
     this->filters[0]=false;
     updateLists();
 }
 
 void MainWindow::delAllerFilter(){
     ui->allerFilter->hide();
+    ui->allergenFreeBox->setChecked(false);
     this->filters[2]=false;
     updateLists();
 }
 
 void MainWindow::delHalalFilter(){
     ui->halalFilter->hide();
+    ui->halalBox->setChecked(false);
     this->filters[1]=false;
     updateLists();
 }
 
 void MainWindow::delGlutenFilter(){
     ui->glutenFilter->hide();
+    ui->glutenFreeBox->setChecked(false);
     this->filters[3]=false;
     updateLists();
 }
