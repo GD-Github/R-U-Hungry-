@@ -28,6 +28,7 @@ public:
     double getSolde(){return solde;}
     QString getName(){return name;}
     void saveUser();
+    QVector<int>* getFavoriteMeal(){return favoriteMeal;}
 
 
 private:

@@ -272,11 +272,18 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
         kCalMealDc->push_back((availableMeal->at(mealsKCal.at(i).second-1)));
     }
 
+    QVector<int>* liked = (this->getUser())->getFavoriteMeal();
+    for (int i=0; i<liked->size(); i++){
+        Meal* selected_meal = getMeal(liked->at(i));
+        selected_meal->setIsFavorite(true);
+    }
+
     updateTotalPrice();
     updateLists();
     updateSolde(currentUser->getSolde());
     fw->setAllMeal(availableMeal);
     bw->setAllMeal(availableMeal);
+
 
 }
 

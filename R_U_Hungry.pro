@@ -41,6 +41,7 @@ FORMS += \
     bannedwindow.ui \
     favoriteswindow.ui \
     mainwindow.ui \
+    quitwindow.ui \
     rechargewindow.ui
 
 # Default rules for deployment.
