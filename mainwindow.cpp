@@ -568,11 +568,14 @@ void MainWindow::command(){
 }
 
 void MainWindow::displaySortMenu(){
+    ui->filterBtn->setEnabled(false);
     if (ui->sortMenu->isHidden()){ui->sortMenu->show();
-    }else{ui->sortMenu->hide();}
+    }else{ui->sortMenu->hide();ui->filterBtn->setEnabled(true);}
 }
 
 void MainWindow::sort(){
+    ui->filterBtn->setEnabled(true);
+
     if (sortGroup->checkedId() == 0) finalMeal = priceMealC;
     if(sortGroup->checkedId() ==1) finalMeal = priceMealDc;
     if(sortGroup->checkedId() ==2) finalMeal = kCalMealC;
@@ -582,17 +585,21 @@ void MainWindow::sort(){
 }
 
 void MainWindow::cancelSort(){
+    ui->filterBtn->setEnabled(true);
+
     ui->sortMenu->hide();
 }
 
 void MainWindow::displayFilterMenu(){
+    ui->sortBtn->setEnabled(false);
     if (ui->filterMenu->isHidden()){ui->filterMenu->show();
-    }else{ui->filterMenu->hide();}
+    }else{ui->filterMenu->hide();ui->sortBtn->setEnabled(true);}
 }
 
 void MainWindow::filter(){
     ui->filterMenu->hide();
-    if (ui->vegetarianBox->isChecked()==true){        
+    ui->sortBtn->setEnabled(true);
+    if (ui->vegetarianBox->isChecked()==true){
         ui->vegeFilterText->show();
         ui->vegeFilterButton->show();
         this->filters[0]=true;
@@ -632,6 +639,8 @@ void MainWindow::filter(){
 }
 
 void MainWindow::cancelFilter(){
+    ui->sortBtn->setEnabled(true);
+
     ui->filterMenu->hide();
 }
 void MainWindow::exit()
