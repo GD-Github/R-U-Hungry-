@@ -5,9 +5,9 @@
 
 
 int main(int argc, char *argv[])
-{    User * currentUser = new User("charles");
-
+{
     QApplication a(argc, argv);
+    User * currentUser = new User("charles");
     MainWindow* mw = new MainWindow(currentUser,nullptr);
     mw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     mw->setAttribute(Qt::WA_TranslucentBackground);

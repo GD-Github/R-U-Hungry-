@@ -8,6 +8,8 @@
 #include <QString>
 #include <QDebug>
 #include <QFile>
+#include <QDir>
+#include <QCoreApplication>
 #include<iostream>
 
 class User
@@ -25,6 +27,7 @@ public:
     void removeSolde(double d){solde -= d;}
     double getSolde(){return solde;}
     QString getName(){return name;}
+    void saveUser();
 
 
 private:

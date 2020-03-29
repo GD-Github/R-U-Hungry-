@@ -604,5 +604,6 @@ void MainWindow::cancelFilter(){
 }
 void MainWindow::exit()
 {
+    currentUser->saveUser();
     close();
 }
