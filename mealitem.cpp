@@ -7,7 +7,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     this->parent = parent;
     this->meal = item;
     this->isChecked = isChecked;
-    vLayout = new QVBoxLayout();
+    /*vLayout = new QVBoxLayout();*/
     QHBoxLayout *layout = new QHBoxLayout;
 
     QVBoxLayout *main_layout= new QVBoxLayout;
@@ -66,15 +66,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {
-    showMore = !showMore;
-    if(showMore){
-        vLayout->addWidget(new QLabel(meal->getDescription()));
-    }else{
-        QLayoutItem *child;
-        child = vLayout->takeAt(1);
-        delete child->widget();
-        delete child;
-    }
+    this->displayInfo();
 }
 
 void MealItem::displayInfo(){

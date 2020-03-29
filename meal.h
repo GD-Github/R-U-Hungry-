@@ -28,7 +28,6 @@ public:
     void setIsBanned(bool status){this->isBanned=status;}
     void setFilters(std::vector<bool> new_filters){this->filters=new_filters;}
     std::vector<bool> getFilters(){return filters;}
-    QString getDescription(){return description;}
 
 private:
     int id;
@@ -42,7 +41,6 @@ private:
     bool isBanned;
     QString description;
     std::vector<bool> filters = {false,false,false,false}; //index 0 for vege, 1 for halal, 2 for free allergens, 3 for free gluten
-    QString description;
 };
 
 #endif // MEAL_H
