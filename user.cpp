@@ -6,7 +6,6 @@ User::User(QString name) : name(name)
 
     favoriteMeal = new QVector<int>();
     bannedMeal = new QVector<int>();
-
     QFile file;
     file.setFileName(QCoreApplication::applicationDirPath()+"/user.json");
     QString errMsg;

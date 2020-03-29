@@ -32,7 +32,9 @@ private:
     bool isChecked = false;
     bool hasFavoriteBtn = true;
     bool hasBannedBtn = true;
+    bool showMore = false;
     QCheckBox* addToCart;
+    QVBoxLayout* vLayout;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
