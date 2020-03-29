@@ -70,10 +70,21 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     ui->vegeFilterButton->setIcon(QIcon(":/icons/delete.png"));
     ui->halalFilterButton->setIcon(QIcon(":/icons/delete.png"));
     ui->glutenFilterButton->setIcon(QIcon(":/icons/delete.png"));
-    ui->glutenFilter->hide();
+    /*ui->glutenFilter->hide();
     ui->halalFilter->hide();
     ui->allerFilter->hide();
-    ui->vegeFilter->hide();
+    ui->vegeFilter->hide();*/
+    ui->glutenFilterText->hide();
+    ui->glutenFilterButton->hide();
+    ui->halalFilterText->hide();
+    ui->halalFilterButton->hide();
+    ui->allerFilterText->hide();
+    ui->allerFilterButton->hide();
+    ui->vegeFilterText->hide();
+    ui->vegeFilterButton->hide();
+
+    ui->filterLayout->setAlignment(Qt::AlignLeft);
+    ui->filterGrpBx->setAlignment(Qt::AlignLeft);
 
     this->currentUser = currentUser;
 
@@ -277,28 +288,36 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::delVegeFilter(){
-    ui->vegeFilter->hide();
+    /*ui->vegeFilter->hide();*/
+    ui->vegeFilterText->hide();
+    ui->vegeFilterButton->hide();
     ui->vegetarianBox->setChecked(false);
     this->filters[0]=false;
     updateLists();
 }
 
 void MainWindow::delAllerFilter(){
-    ui->allerFilter->hide();
+    /*ui->allerFilter->hide();*/
+    ui->allerFilterText->hide();
+    ui->allerFilterButton->hide();
     ui->allergenFreeBox->setChecked(false);
     this->filters[2]=false;
     updateLists();
 }
 
 void MainWindow::delHalalFilter(){
-    ui->halalFilter->hide();
+    /*ui->halalFilter->hide();*/
+    ui->halalFilterText->hide();
+    ui->halalFilterButton->hide();
     ui->halalBox->setChecked(false);
     this->filters[1]=false;
     updateLists();
 }
 
 void MainWindow::delGlutenFilter(){
-    ui->glutenFilter->hide();
+    /*ui->glutenFilter->hide();*/
+    ui->glutenFilterText->hide();
+    ui->glutenFilterButton->hide();
     ui->glutenFreeBox->setChecked(false);
     this->filters[3]=false;
     updateLists();
@@ -546,7 +565,8 @@ void MainWindow::command(){
 }
 
 void MainWindow::displaySortMenu(){
-    ui->sortMenu->show();
+    if (ui->sortMenu->isHidden()){ui->sortMenu->show();
+    }else{ui->sortMenu->hide();}
 }
 
 void MainWindow::sort(){
@@ -563,37 +583,46 @@ void MainWindow::cancelSort(){
 }
 
 void MainWindow::displayFilterMenu(){
-    ui->filterMenu->show();
+    if (ui->filterMenu->isHidden()){ui->filterMenu->show();
+    }else{ui->filterMenu->hide();}
 }
 
 void MainWindow::filter(){
     ui->filterMenu->hide();
-    if (ui->vegetarianBox->isChecked()==true){
-        ui->vegeFilter->show();
+    if (ui->vegetarianBox->isChecked()==true){        
+        ui->vegeFilterText->show();
+        ui->vegeFilterButton->show();
         this->filters[0]=true;
-    }else{
-        ui->vegeFilter->hide();
+    }else{        
+        ui->vegeFilterText->hide();
+        ui->vegeFilterButton->hide();
         this->filters[0]=false;
     }
-    if (ui->halalBox->isChecked()==true){
-        ui->halalFilter->show();
+    if (ui->halalBox->isChecked()==true){        
+        ui->halalFilterText->show();
+        ui->halalFilterButton->show();
         this->filters[1]=true;
     }else{
-        ui->halalFilter->hide();
+        ui->halalFilterText->hide();
+        ui->halalFilterButton->hide();
         this->filters[1]=false;
     }
     if(ui->allergenFreeBox->isChecked()==true){
-        ui->allerFilter->show();
+        ui->allerFilterText->show();
+        ui->allerFilterButton->show();
         this->filters[2]=true;
     }else{
-        ui->allerFilter->hide();
+        ui->allerFilterText->hide();
+        ui->allerFilterButton->hide();
         this->filters[2]=false;
     }
     if(ui->glutenFreeBox->isChecked()==true){
-        ui->glutenFilter->show();
+        ui->glutenFilterText->show();
+        ui->glutenFilterButton->show();
         this->filters[3]=true;
     }else{
-        ui->glutenFilter->hide();
+        ui->glutenFilterText->hide();
+        ui->glutenFilterButton->hide();
         this->filters[3]=false;
     }
     updateLists();

@@ -51,7 +51,7 @@
         "id":5,
         "name":"Côte de porc",
         "type":2,
-        "price":204,
+        "price":2.04,
 	"kcal":267,
         "description":"Une description",
         "vege":false,
