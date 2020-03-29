@@ -10,6 +10,16 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 {
     ui->setupUi(this);
 
+    QPushButton* lastMinuteBtn = new QPushButton(tr("Ok"),this);
+    removeItemsBox = new QMessageBox(this);
+    removeItemsBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
+
+    removeItemsBox->setIcon(QMessageBox::Warning);
+    removeItemsBox->addButton(lastMinuteBtn,QMessageBox::NoRole);
+    removeItemsBox->setText(QString("Vous devez retirer des éléments de votre panier avant de descendre le prix maximal."));
+    removeItemsBox->setWindowTitle(QString("Oups !"));
+
+
     QPushButton* confirmBtn = new QPushButton(tr("Confirmer"),this);
     QPushButton* cancelBtn = new QPushButton(tr("Annuler"),this);
     confirmationBox = new QMessageBox(this);
@@ -517,10 +527,14 @@ void MainWindow::updateTotalPrice(){
 
 
 void MainWindow::updateMaxPrice(int value){
+    if(3 +0.5*value < totalPrice){
+    removeItemsBox->exec();
+    }
+    else{
 QString str = QString::fromStdString(std::to_string((30+5*value)/10)+ "." + std::to_string(30+5*value-(30+5*value)/10*10)+ " ") + QChar(0x20AC);
 ui->maxPrice->setText(str);
 update();
-maximumPrice = 3 +0.5*value;
+maximumPrice = 3 +0.5*value;}
 }
 
 void MainWindow::updateSolde(double value){

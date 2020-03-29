@@ -41,6 +41,7 @@ private:
     QMessageBox * confirmationBox;
     QMessageBox* rechargeBox;
     QMessageBox* tooExpansiveBox;
+    QMessageBox* removeItemsBox;
 
     Ui::MainWindow *ui;
 
