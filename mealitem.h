@@ -22,7 +22,7 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false, bool hasFavoriteBtn = true, bool hasBannedBtn = true,bool isChecked = false);
+    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false, bool hasFavoriteBtn = true, bool hasBannedBtn = true, bool hasArrowBtn = true ,bool isChecked = false);
     Meal * getMeal() {return meal;}
     bool getIsChecked(){return isChecked;}
 
@@ -33,6 +33,7 @@ private:
     Meal_Window * parent;
     Meal * meal;
     bool isChecked = false;
+    bool hasArrowBtn = true;
     bool hasFavoriteBtn = true;
     bool hasBannedBtn = true;
     bool showMore = false;

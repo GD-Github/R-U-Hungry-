@@ -448,7 +448,7 @@ void MainWindow::updateLists(){
         //add the price to Total and checks if it is higher than the maxPrice
     int selectedItem = currentCommand->at(i);
     Meal* meal = availableMeal->at(selectedItem-1);
-    commandList->addWidget(new MealItem(this,meal,true,false,false,true));
+    commandList->addWidget(new MealItem(this,meal,true,false,false,false,true));
     totalPrice+=meal->getPrice();
 
 }

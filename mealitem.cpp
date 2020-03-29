@@ -1,9 +1,10 @@
 #include "mealitem.h"
 
-MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn, bool isChecked) :QWidget()
+MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn,bool hasArrowBtn, bool isChecked) :QWidget()
 {
     this->hasBannedBtn = hasBannedBtn;
     this->hasFavoriteBtn = hasFavoriteBtn;
+    this->hasArrowBtn = hasArrowBtn;
     this->parent = parent;
     this->meal = item;
     this->isChecked = isChecked;
@@ -54,10 +55,10 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     layout->addWidget(bannedButton, 1);
     connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
     }
-
+    if(this->hasArrowBtn){
     infoButton = new QPushButton(QIcon(":/icons/info+.png"),"",this);
     layout->addWidget(infoButton, 1);
-    connect(infoButton, SIGNAL(clicked()), this, SLOT(displayInfo()));
+    connect(infoButton, SIGNAL(clicked()), this, SLOT(displayInfo()));}
 
     this->setLayout(main_layout);
 
