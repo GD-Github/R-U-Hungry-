@@ -68,6 +68,8 @@ private:
     QVector<Meal*> * finalMeal;
     QButtonGroup* sortGroup;
 
+    QVector<Meal*> * displayedInfos;
+
     QVector<int> * currentCommand;
 
     User * currentUser;

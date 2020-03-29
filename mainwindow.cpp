@@ -529,8 +529,12 @@ void MainWindow::updateSolde(double value){
     QString str;
     if (rounded >=1000)
         str = QString::fromStdString(std::to_string(rounded).substr(0,2) + "." + std::to_string(rounded).substr(2,2) + " ") +QChar(0x20AC);
-    else
+    else{
+        if(rounded >= 100)
         str = QString::fromStdString(std::to_string(rounded).substr(0,1) + "." + std::to_string(rounded).substr(1,2) +" ") +QChar(0x20AC);
+        else
+        str = QString::fromStdString(std::to_string(rounded).substr(0,1) + "." + std::to_string(rounded).substr(2,2) +" ") +QChar(0x20AC);
+    }
 
     ui->balanceTxt->setText(str);
     update();
