@@ -25,32 +25,34 @@ User::User(QString name) : name(name)
         QTextStream stream(&file);
         stream << templateString;
 
-    }else{
-        QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
-        QJsonObject jsonObject = doc.object();
-        QJsonValue value = jsonObject.value(name);
-        if(value != QJsonValue::Undefined){
-            QJsonObject user = value.toObject();
-            value = user.value("solde");
-            if(value!=QJsonValue::Undefined){
-                solde = value.toDouble();
-            }
-            value = user.value("liked");
-            if(value!=QJsonValue::Undefined){
-                QJsonArray likedArray = value.toArray();
-                for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
-                    favoriteMeal->append(it->toInt());
-                }
-            }
-            value = user.value("banned");
-            if(value!=QJsonValue::Undefined){
-                QJsonArray bannedArray = value.toArray();
-                for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
-                    bannedMeal->append(it->toInt());
-                }
-            }
-
+    }
+    file.close();
+    file.open(QFile::ReadOnly | QFile::Text);
+    json_string = file.readAll();
+    QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
+    QJsonObject jsonObject = doc.object();
+    QJsonValue value = jsonObject.value(name);
+    if(value != QJsonValue::Undefined){
+        QJsonObject user = value.toObject();
+        value = user.value("solde");
+        if(value!=QJsonValue::Undefined){
+            solde = value.toDouble();
         }
+        value = user.value("liked");
+        if(value!=QJsonValue::Undefined){
+            QJsonArray likedArray = value.toArray();
+            for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
+                favoriteMeal->append(it->toInt());
+            }
+        }
+        value = user.value("banned");
+        if(value!=QJsonValue::Undefined){
+            QJsonArray bannedArray = value.toArray();
+            for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
+                bannedMeal->append(it->toInt());
+            }
+        }
+
     }
     file.close();
 
