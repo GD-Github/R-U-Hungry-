@@ -10,37 +10,51 @@ User::User(QString name) : name(name)
     file.setFileName(QCoreApplication::applicationDirPath()+"/user.json");
     QString errMsg;
     QFileDevice::FileError err = QFileDevice::NoError;
-    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+    if (!file.open(QFile::ReadWrite | QFile::Text)) {
         errMsg = file.errorString();
         err = file.error();
     }
-    json_string = file.readAll();
-    file.close();
-    QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
-    QJsonObject jsonObject = doc.object();
-    QJsonValue value = jsonObject.value(name);
-    if(value != QJsonValue::Undefined){
-        QJsonObject user = value.toObject();
-        value = user.value("solde");
-        if(value!=QJsonValue::Undefined){
-            solde = value.toDouble();
-        }
-        value = user.value("liked");
-        if(value!=QJsonValue::Undefined){
-            QJsonArray likedArray = value.toArray();
-            for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
-                favoriteMeal->append(it->toInt());
-            }
-        }
-        value = user.value("banned");
-        if(value!=QJsonValue::Undefined){
-            QJsonArray bannedArray = value.toArray();
-            for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
-                bannedMeal->append(it->toInt());
-            }
-        }
 
+    json_string = file.readAll();
+    if(json_string == ""){
+        qDebug() << "test";
+        QFile templateFile;
+        templateFile.setFileName(":/user.json");
+        templateFile.open(QFile::ReadOnly | QFile::Text);
+        QString templateString = templateFile.readAll();
+        templateFile.close();
+        QTextStream stream(&file);
+        stream << templateString;
+
+    }else{
+        QJsonDocument doc = QJsonDocument::fromJson(json_string.toUtf8());
+        QJsonObject jsonObject = doc.object();
+        QJsonValue value = jsonObject.value(name);
+        if(value != QJsonValue::Undefined){
+            QJsonObject user = value.toObject();
+            value = user.value("solde");
+            if(value!=QJsonValue::Undefined){
+                solde = value.toDouble();
+            }
+            value = user.value("liked");
+            if(value!=QJsonValue::Undefined){
+                QJsonArray likedArray = value.toArray();
+                for(auto it = likedArray.begin() ; it!= likedArray.end() ; ++it){
+                    favoriteMeal->append(it->toInt());
+                }
+            }
+            value = user.value("banned");
+            if(value!=QJsonValue::Undefined){
+                QJsonArray bannedArray = value.toArray();
+                for(auto it = bannedArray.begin() ; it!= bannedArray.end() ; ++it){
+                    bannedMeal->append(it->toInt());
+                }
+            }
+
+        }
     }
+    file.close();
+
 }
 
 void User::saveUser(){

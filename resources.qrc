@@ -11,5 +11,6 @@
     <qresource prefix="/">
         <file>mealList.json</file>
         <file>availableMeal.txt</file>
+        <file>user.json</file>
     </qresource>
 </RCC>
