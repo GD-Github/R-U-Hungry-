@@ -3,6 +3,8 @@
 User::User(QString name) : name(name)
 {
     QString json_string;
+    if (solde < 0) solde =0;
+
 
     favoriteMeal = new QVector<int>();
     bannedMeal = new QVector<int>();
