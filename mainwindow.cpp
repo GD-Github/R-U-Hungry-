@@ -60,8 +60,22 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
     connect(ui->commandBtn,SIGNAL(clicked()),this,SLOT(command()));
 
-     this->currentUser = currentUser;
 
+    connect(ui->vegeFilterButton,SIGNAL(clicked()),this,SLOT(delVegeFilter()));
+    connect(ui->halalFilterButton,SIGNAL(clicked()),this,SLOT(delHalalFilter()));
+    connect(ui->allerFilterButton,SIGNAL(clicked()),this,SLOT(delAllerFilter()));
+    connect(ui->glutenFilterButton,SIGNAL(clicked()),this,SLOT(delGlutenFilter()));
+    //Filter part
+    ui->allerFilterButton->setIcon(QIcon(":/icons/delete.png"));
+    ui->vegeFilterButton->setIcon(QIcon(":/icons/delete.png"));
+    ui->halalFilterButton->setIcon(QIcon(":/icons/delete.png"));
+    ui->glutenFilterButton->setIcon(QIcon(":/icons/delete.png"));
+    ui->glutenFilter->hide();
+    ui->halalFilter->hide();
+    ui->allerFilter->hide();
+    ui->vegeFilter->hide();
+
+    this->currentUser = currentUser;
 
     ui->usernameLbl->setText(currentUser->getName());
 
@@ -262,6 +276,30 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::delVegeFilter(){
+    ui->vegeFilter->hide();
+    this->filters[0]=false;
+    updateLists();
+}
+
+void MainWindow::delAllerFilter(){
+    ui->allerFilter->hide();
+    this->filters[2]=false;
+    updateLists();
+}
+
+void MainWindow::delHalalFilter(){
+    ui->halalFilter->hide();
+    this->filters[1]=false;
+    updateLists();
+}
+
+void MainWindow::delGlutenFilter(){
+    ui->glutenFilter->hide();
+    this->filters[3]=false;
+    updateLists();
+}
+
 void MainWindow::rechargeBtnAction()
 {
     rw->show();
@@ -387,7 +425,8 @@ void MainWindow::updateLists(){
 
 
     for(auto it=finalMeal->begin() ; it!=finalMeal->end() ; ++it){
-
+    std::vector<bool> meal_val = (*it)->getFilters();
+    if ((meal_val[0] || (!(filters[0]))) && (meal_val[1] || (!(filters[1]))) && (meal_val[2] || (!(filters[2]))) && (meal_val[3] || (!(filters[3])))){
 
         switch ((*it)->getType()) {
         case 1:
@@ -436,6 +475,7 @@ void MainWindow::updateLists(){
             if(currentUser->favoritesContain((*it)->getId())&&(!currentUser->bannedContain((*it)->getId()))){ drinksLikedList->addWidget(new MealItem(this,*it,true));}}
             break;
         }
+    }
     }
 
 
@@ -524,6 +564,35 @@ void MainWindow::displayFilterMenu(){
 
 void MainWindow::filter(){
     ui->filterMenu->hide();
+    if (ui->vegetarianBox->isChecked()==true){
+        ui->vegeFilter->show();
+        this->filters[0]=true;
+    }else{
+        ui->vegeFilter->hide();
+        this->filters[0]=false;
+    }
+    if (ui->halalBox->isChecked()==true){
+        ui->halalFilter->show();
+        this->filters[1]=true;
+    }else{
+        ui->halalFilter->hide();
+        this->filters[1]=false;
+    }
+    if(ui->allergenFreeBox->isChecked()==true){
+        ui->allerFilter->show();
+        this->filters[2]=true;
+    }else{
+        ui->allerFilter->hide();
+        this->filters[2]=false;
+    }
+    if(ui->glutenFreeBox->isChecked()==true){
+        ui->glutenFilter->show();
+        this->filters[3]=true;
+    }else{
+        ui->glutenFilter->hide();
+        this->filters[3]=false;
+    }
+    updateLists();
 }
 
 void MainWindow::cancelFilter(){

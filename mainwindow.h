@@ -79,6 +79,8 @@ private:
     double maximumPrice = 5;
     double totalPrice ;
 
+    std::vector<bool> filters ={false,false,false,false};
+
 
 public slots:
     void updateSolde(double);
@@ -101,6 +103,10 @@ public slots:
     void filter();
     void cancelFilter();
     Meal* getMeal(int id);
+    void delVegeFilter();
+    void delHalalFilter();
+    void delAllerFilter();
+    void delGlutenFilter();
 
 signals:
     void soldeChanged(double);

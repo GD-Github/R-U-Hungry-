@@ -2,6 +2,8 @@
 #define MEAL_H
 
 #include <QString>
+#include <vector>
+using namespace std;
 
 
 /*
@@ -11,7 +13,7 @@
 class Meal
 {
 public:
-    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite=false, bool isBanned=false);
+    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite=false, bool isBanned=false, std::vector<bool> filters={false,false,false,false});
     int getId() {return id;}
     QString getName() {return name;}
     float getPrice() {return price;}
@@ -23,6 +25,8 @@ public:
     bool getBanned(){return isBanned;}
     void setIsFavorite(bool new_status){this->isFavorite=new_status;}
     void setIsBanned(bool status){this->isBanned=status;}
+    void setFilters(std::vector<bool> new_filters){this->filters=new_filters;}
+    std::vector<bool> getFilters(){return filters;}
 
 private:
     int id;
@@ -34,6 +38,7 @@ private:
     int type = 0;
     bool isFavorite;
     bool isBanned;
+    std::vector<bool> filters = {false,false,false,false}; //index 0 for vege, 1 for halal, 2 for free allergens, 3 for free gluten
 };
 
 #endif // MEAL_H
