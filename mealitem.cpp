@@ -18,7 +18,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
     descrip = new QLabel(item->getDescription());
     kcal = new QLabel("kCal: "+QString::number(item->getkCal()));
-    info_layout->addWidget(descrip, 7 );
+    info_layout->addWidget(descrip, 7);
     info_layout->addWidget(kcal ,4);
     descrip->hide();
     kcal->hide();

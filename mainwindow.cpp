@@ -10,13 +10,13 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 {
     ui->setupUi(this);
 
-    QPushButton* lastMinuteBtn = new QPushButton(tr("Ok"),this);
+    QPushButton* lastMinuteBtn = new QPushButton(tr("OK"),this);
     removeItemsBox = new QMessageBox(this);
     removeItemsBox->setWindowFlags((Qt::Dialog | Qt::FramelessWindowHint | Qt::WindowTitleHint) & ~Qt::WindowCloseButtonHint);
 
     removeItemsBox->setIcon(QMessageBox::Warning);
     removeItemsBox->addButton(lastMinuteBtn,QMessageBox::NoRole);
-    removeItemsBox->setText(QString("Vous devez retirer des éléments de votre panier avant de descendre le prix maximal."));
+    removeItemsBox->setText(QString("Vous devez retirer des éléments de votre panier avant de diminuer le prix maximal."));
     removeItemsBox->setWindowTitle(QString("Oups !"));
 
 
@@ -94,7 +94,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
     ui->vegeFilterButton->hide();
 
     ui->filterLayout->setAlignment(Qt::AlignLeft);
-    ui->filterGrpBx->setAlignment(Qt::AlignLeft);
+    //ui->filterGrpBx->setAlignment(Qt::AlignLeft);
 
     this->currentUser = currentUser;
 

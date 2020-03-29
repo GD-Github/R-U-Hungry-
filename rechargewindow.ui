@@ -42,7 +42,7 @@ QPushButton {
 	color: rgb(255, 255, 255);
 	border: 2px solid rgb(102, 102, 155);
 	border-radius: 8px;
-	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+	font: 8pt &quot;Arial&quot;;
 }
 
 QPushButton:hover {
@@ -62,7 +62,7 @@ QLineEdit {
 	border-radius: 3px;
 	color: rgb(85, 85, 127);
 	qproperty-alignment: AlignCenter;
-	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+	font: 8pt &quot;Arial&quot;;
 }
 
 QLabel {
@@ -70,7 +70,7 @@ QLabel {
 	border-radius: 3px;
 	color: rgb(85, 85, 127);
 	qproperty-alignment: AlignCenter;
-	font: 63 8pt &quot;Segoe UI Semibold&quot;;
+	font: 8pt &quot;Arial&quot;;
 }
 
 QSlider::handle {
@@ -128,6 +128,9 @@ QMessageBox QPushButton {
      </property>
     </widget>
     <widget class="QLineEdit" name="amountTxt">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>160</x>
