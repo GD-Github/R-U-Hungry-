@@ -26,6 +26,9 @@ public:
     Meal * getMeal() {return meal;}
     bool getIsChecked(){return isChecked;}
 
+public slots:
+    void displayInfo();
+
 private:
     Meal_Window * parent;
     Meal * meal;
@@ -33,6 +36,9 @@ private:
     bool hasFavoriteBtn = true;
     bool hasBannedBtn = true;
     QCheckBox* addToCart;
+    QLabel* descrip;
+    QLabel* kcal;
+    QPushButton * infoButton;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;

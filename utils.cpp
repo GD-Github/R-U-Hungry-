@@ -17,7 +17,7 @@ void Utils::readMealFromJson(QVector<Meal*>* allMeal){
         bool aller = mealObject["aller"].toBool();
         bool gluten = mealObject["gluten"].toBool();
         std::vector<bool> vec = {vege,halal,aller,gluten};
-        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),mealObject["kcal"].toInt(),false,false,false,false,vec));
+        allMeal->append(new Meal(mealObject["id"].toInt(),mealObject["name"].toString(),mealObject["type"].toInt(),(float)mealObject["price"].toDouble(),mealObject["kcal"].toInt(),false,false,false,false,vec,mealObject["description"].toString()));
     }
 }
 

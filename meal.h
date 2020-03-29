@@ -13,7 +13,7 @@ using namespace std;
 class Meal
 {
 public:
-    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite, bool isBanned, std::vector<bool> filters);
+    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite, bool isBanned, std::vector<bool> filters, QString description);
     int getId() {return id;}
     QString getName() {return name;}
     float getPrice() {return price;}
@@ -27,6 +27,7 @@ public:
     void setIsBanned(bool status){this->isBanned=status;}
     void setFilters(std::vector<bool> new_filters){this->filters=new_filters;}
     std::vector<bool> getFilters(){return filters;}
+    QString getDescription(){return description;}
 
 private:
     int id;
@@ -39,6 +40,7 @@ private:
     bool isFavorite;
     bool isBanned;
     std::vector<bool> filters = {false,false,false,false}; //index 0 for vege, 1 for halal, 2 for free allergens, 3 for free gluten
+    QString description;
 };
 
 #endif // MEAL_H

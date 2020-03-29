@@ -7,6 +7,8 @@
         <file>empty_heart.png</file>
         <file>empty_banned.png</file>
         <file>delete.png</file>
+        <file>info-.png</file>
+        <file>info+.png</file>
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>
