@@ -17,7 +17,6 @@ User::User(QString name) : name(name)
 
     json_string = file.readAll();
     if(json_string == ""){
-        qDebug() << "test";
         QFile templateFile;
         templateFile.setFileName(":/user.json");
         templateFile.open(QFile::ReadOnly | QFile::Text);
