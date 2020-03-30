@@ -67,7 +67,8 @@ void RechargeWindow::pay(){
     currentUser->addSolde(ui->rechargeSlider->value()/5*5);
     emit(soldeChanged(currentUser->getSolde()));
     this->hide();
-    parentWidget()->show();}
+    this->pw->show();
+    }
 }
 
 RechargeWindow::~RechargeWindow()

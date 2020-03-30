@@ -13,6 +13,19 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <widget class="QPushButton" name="windowButton">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>-10</y>
+     <width>581</width>
+     <height>661</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Suivez les instructions </string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

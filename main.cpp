@@ -1,18 +1,16 @@
 #include "mainwindow.h"
 #include <QApplication>
 #include "startwindow.h"
+#include<iostream>
 
-
-
+using namespace std;
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    User * currentUser = new User("charles");
-    MainWindow* mw = new MainWindow(currentUser,nullptr);
-    mw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-    mw->setAttribute(Qt::WA_TranslucentBackground);
-    mw->show();
-
+    StartWindow* sw = new StartWindow(nullptr);
+    sw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    sw->setAttribute(Qt::WA_TranslucentBackground);
+    sw->show();
     return a.exec();
 }
 

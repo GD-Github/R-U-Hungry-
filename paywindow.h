@@ -2,12 +2,13 @@
 #define PAYWINDOW_H
 
 #include <QWidget>
+#include "meal_window.h"
 
 namespace Ui {
 class PayWindow;
 }
 
-class PayWindow : public QWidget
+class PayWindow : public Meal_Window
 {
     Q_OBJECT
 
@@ -17,6 +18,11 @@ public:
 
 private:
     Ui::PayWindow *ui;
+
+public slots:
+    void likedAsChanged(int id) override;
+    void bannedAsChanged(int id) override;
+    void processPaiement();
 };
 
 #endif // PAYWINDOW_H

@@ -2,12 +2,12 @@
 #define STARTWINDOW_H
 
 #include <QWidget>
-
+#include "mainwindow.h"
 namespace Ui {
 class StartWindow;
 }
 
-class StartWindow : public QWidget
+class StartWindow : public QMainWindow
 {
     Q_OBJECT
 
@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::StartWindow *ui;
+    MainWindow* mw = nullptr;
+
+public slots:
+    void launchMain();
 };
 
 #endif // STARTWINDOW_H

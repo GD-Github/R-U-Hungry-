@@ -5,6 +5,7 @@
 #include <QMainWindow>
 #include<QMessageBox>
 #include <QPushButton>
+#include"paywindow.h"
 
 namespace Ui {
 class RechargeWindow;
@@ -19,6 +20,7 @@ public:
     ~RechargeWindow();
     void setBw(QMainWindow* bw){this->bw = bw;}
     void setFw(QMainWindow* fw){this->fw = fw;}
+    void setPw(QMainWindow* pw){this->pw = pw;}
 
 private:
     QMessageBox* confirmationBox;
@@ -26,6 +28,7 @@ private:
     User * currentUser;
     QMainWindow * bw;
     QMainWindow * fw;
+    QMainWindow * pw;
 
 public slots:
     void updatePrice(int);

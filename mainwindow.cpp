@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include <iostream>
 
-
+using namespace std;
 
 MainWindow::MainWindow(User* currentUser,QWidget *parent)
     : Meal_Window(parent)
@@ -107,15 +107,21 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
      rw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
      rw->setAttribute(Qt::WA_TranslucentBackground);
      FavoritesWindow* fw = new FavoritesWindow(this->currentUser,this);
-      fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
-      fw->setAttribute(Qt::WA_TranslucentBackground);
+     fw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     fw->setAttribute(Qt::WA_TranslucentBackground);
 
+
+     PayWindow* pw = new PayWindow(this);
+     pw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     pw->setAttribute(Qt::WA_TranslucentBackground);
      this->bw = bw;
      this->rw = rw;
      this->fw = fw;
+     this->pw =pw;
 
      rw->setBw(bw);
      rw->setFw(fw);
+     rw->setPw(pw);
 
      fw->setBw(bw);
 

@@ -13,6 +13,22 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="autoFillBackground">
+   <bool>true</bool>
+  </property>
+  <widget class="QPushButton" name="windowButton">
+   <property name="geometry">
+    <rect>
+     <x>-20</x>
+     <y>-20</y>
+     <width>591</width>
+     <height>661</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Click to start</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
