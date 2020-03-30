@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>562</width>
+    <width>561</width>
     <height>633</height>
    </rect>
   </property>
@@ -16,18 +16,103 @@
   <property name="autoFillBackground">
    <bool>true</bool>
   </property>
-  <widget class="QPushButton" name="windowButton">
+  <property name="styleSheet">
+   <string notr="true">#centralwidget {
+	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(55, 55, 85);
+	border-radius: 12px;
+}
+
+#widget { 
+	border-image: url(:/icons/scan.png);
+}
+
+#windowButton {
+	background-color: transparent;
+	border: 2px dashed rgb(85, 85, 127);
+	border-radius: 10px;
+}
+
+#windowButton:hover {
+	border: 2px dashed rgb(240, 235, 255);
+}
+
+#logoLbl {	
+	font: 25pt &quot;Ink Free&quot;;
+	color: rgb(55, 55, 85);
+	font-weight: bold;
+	qproperty-alignment: AlignCenter;
+}
+
+#label {
+	color: rgb(85, 85, 127);
+	font-weight: bold;
+	qproperty-alignment: AlignCenter;
+	font: 18pt &quot;Tw Cen MT Condensed Extra Bold&quot;;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
     <rect>
-     <x>-20</x>
-     <y>-20</y>
-     <width>591</width>
-     <height>661</height>
+     <x>0</x>
+     <y>0</y>
+     <width>561</width>
+     <height>631</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Click to start</string>
-   </property>
+   <widget class="QPushButton" name="windowButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>361</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logoLbl">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>50</y>
+      <width>221</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>R U Hungry ?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>480</y>
+      <width>561</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Bonjour ! Scannez votre carte étudiante</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>160</y>
+      <width>281</width>
+      <height>281</height>
+     </rect>
+    </property>
+   </widget>
+   <zorder>widget</zorder>
+   <zorder>logoLbl</zorder>
+   <zorder>label</zorder>
+   <zorder>windowButton</zorder>
   </widget>
  </widget>
  <resources/>

@@ -9,6 +9,9 @@
         <file>delete.png</file>
         <file>info-.png</file>
         <file>info+.png</file>
+        <file>scan.png</file>
+        <file>machine.png</file>
+        <file>ticket.png</file>
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>
