@@ -67,7 +67,8 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {
-    this->displayInfo();
+    this->isChecked = !this->isChecked;
+    parent->cartAsChanged(this->meal->getId());
 }
 
 void MealItem::displayInfo(){
