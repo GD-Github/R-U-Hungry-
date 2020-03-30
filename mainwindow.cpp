@@ -441,9 +441,7 @@ void MainWindow::cartAsChanged(int id){
 }
 
 void MainWindow::updateLists(){
-    if(totalPrice<0.01) ui->commandBtn->setEnabled(false);
-    else
-        ui->commandBtn->setEnabled(true);
+
     clearLayout(startersList);
     clearLayout(dishesList);
     clearLayout(sidesList);
@@ -467,7 +465,9 @@ void MainWindow::updateLists(){
     totalPrice+=meal->getPrice();
 
 }
-
+    if(totalPrice<0.01) ui->commandBtn->setEnabled(false);
+    else
+        ui->commandBtn->setEnabled(true);
 
 
 
