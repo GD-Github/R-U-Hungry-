@@ -552,11 +552,18 @@ QLineEdit {
 	font: 8pt &quot;Arial&quot;;
 }
 
-QLabel, QRadioButton, QCheckBox {
+QLabel {
 	background-color: rgb(240, 235, 255);
 	border-radius: 3px;
 	color: rgb(85, 85, 127);
 	qproperty-alignment: AlignCenter;
+	font: 8pt &quot;Arial&quot;;
+}
+
+QRadioButton, QCheckBox {
+	background-color: rgb(240, 235, 255);
+	border-radius: 3px;
+	color: rgb(85, 85, 127);
 	font: 8pt &quot;Arial&quot;;
 }
 
@@ -1257,7 +1264,7 @@ QMessageBox QPushButton {
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>kCal décroissantes</string>
+      <string>kCal Décroissantes</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="sortCalCBtn">
@@ -1270,7 +1277,7 @@ QMessageBox QPushButton {
       </rect>
      </property>
      <property name="text">
-      <string>kCal croissantes</string>
+      <string>kCal Croissantes</string>
      </property>
     </widget>
     <widget class="QRadioButton" name="sortPriceDBtn">
@@ -1286,7 +1293,7 @@ QMessageBox QPushButton {
       </rect>
      </property>
      <property name="text">
-      <string>Prix décroissant</string>
+      <string>Prix Décroissant</string>
      </property>
     </widget>
     <widget class="QPushButton" name="sortBtn_2">
@@ -1331,7 +1338,7 @@ QMessageBox QPushButton {
       <bool>false</bool>
      </property>
      <property name="text">
-      <string>Prix croissant</string>
+      <string>Prix Croissant</string>
      </property>
     </widget>
    </widget>
