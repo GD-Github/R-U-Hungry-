@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include<QButtonGroup>
 #include"paywindow.h"
+#include "quitwindow.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -79,6 +80,7 @@ private:
     BannedWindow* bw;
     RechargeWindow* rw;
     PayWindow* pw;
+    QuitWindow * qw;
 
 
     double maximumPrice = 5;

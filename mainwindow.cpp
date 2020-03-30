@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <iostream>
+#include <Qtimer>
 
 using namespace std;
 
@@ -114,10 +115,16 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
      PayWindow* pw = new PayWindow(this);
      pw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
      pw->setAttribute(Qt::WA_TranslucentBackground);
+
+     QuitWindow* qw = new QuitWindow(this);
+     qw->setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+     qw->setAttribute(Qt::WA_TranslucentBackground);
+
      this->bw = bw;
      this->rw = rw;
      this->fw = fw;
      this->pw =pw;
+     this->qw = qw;
 
      rw->setBw(bw);
      rw->setFw(fw);
@@ -577,7 +584,12 @@ void MainWindow::command(){
     emit(soldeChanged(currentUser->getSolde()));
     currentCommand->clear();
     updateLists();
-    update();}}
+    qw->show();
+    this->hide();
+    update();
+    QTimer *timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), this, SLOT(close()));
+        timer->start(2000);}}
     else{
     int val = rechargeBox->exec();
     if (val == 1){

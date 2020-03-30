@@ -2,7 +2,7 @@
 #include "ui_quitwindow.h"
 
 QuitWindow::QuitWindow(QWidget *parent) :
-    QWidget(parent),
+    QMainWindow(parent),
     ui(new Ui::QuitWindow)
 {
     ui->setupUi(this);

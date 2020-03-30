@@ -1,13 +1,13 @@
 #ifndef QUITWINDOW_H
 #define QUITWINDOW_H
-
+#include<QMainWindow>
 #include <QWidget>
 
 namespace Ui {
 class QuitWindow;
 }
 
-class QuitWindow : public QWidget
+class QuitWindow : public QMainWindow
 {
     Q_OBJECT
 
