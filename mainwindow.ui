@@ -524,6 +524,9 @@ QScrollArea {
 
 #commandScrollArea QWidget {
 	background-color: rgb(235, 248, 255);
+}
+
+#commandScrollArea QLabel {
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
 }
 
