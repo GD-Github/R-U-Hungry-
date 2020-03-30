@@ -22,7 +22,10 @@ SOURCES += \
     mainwindow.cpp \
     meal.cpp \
     mealitem.cpp \
+    paywindow.cpp \
+    quitwindow.cpp \
     rechargewindow.cpp \
+    startwindow.cpp \
     user.cpp \
     utils.cpp
 
@@ -33,7 +36,10 @@ HEADERS += \
     meal.h \
     meal_window.h \
     mealitem.h \
+    paywindow.h \
+    quitwindow.h \
     rechargewindow.h \
+    startwindow.h \
     user.h \
     utils.h
 
@@ -41,8 +47,10 @@ FORMS += \
     bannedwindow.ui \
     favoriteswindow.ui \
     mainwindow.ui \
+    paywindow.ui \
     quitwindow.ui \
-    rechargewindow.ui
+    rechargewindow.ui \
+    startwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
