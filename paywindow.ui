@@ -13,18 +13,104 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="windowButton">
+  <property name="styleSheet">
+   <string notr="true">#centralwidget {
+	background-color: rgb(218, 208, 255);
+	border: 2px solid rgb(55, 55, 85);
+	border-radius: 12px;
+}
+
+#widget { 
+	border-image: url(:/icons/machine.png);
+}
+
+#windowButton {
+	background-color: transparent;
+	border: 2px dotted rgb(85, 85, 127);
+	border-radius: 12px;
+}
+
+#windowButton:hover {
+	border: 2px dotted rgb(240, 235, 255);
+}
+
+#logoLbl {	
+	font: 25pt &quot;Ink Free&quot;;
+	color: rgb(55, 55, 85);
+	font-weight: bold;
+	qproperty-alignment: AlignCenter;
+}
+
+#label {
+	background-color: transparent;
+	color: rgb(85, 85, 127);
+	font-weight: bold;
+	qproperty-alignment: AlignCenter;
+	font: 18pt &quot;Tw Cen MT Condensed Extra Bold&quot;;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget" native="true">
    <property name="geometry">
     <rect>
-     <x>-10</x>
-     <y>-10</y>
-     <width>581</width>
-     <height>661</height>
+     <x>0</x>
+     <y>0</y>
+     <width>561</width>
+     <height>631</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Suivez les instructions </string>
-   </property>
+   <widget class="QPushButton" name="windowButton">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>120</y>
+      <width>361</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string> </string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>160</y>
+      <width>281</width>
+      <height>281</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="logoLbl">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>30</y>
+      <width>361</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>R U Hungry ?</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>480</y>
+      <width>561</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Suivez les instructions sur le lecteur</string>
+    </property>
+   </widget>
+   <zorder>widget</zorder>
+   <zorder>windowButton</zorder>
+   <zorder>logoLbl</zorder>
+   <zorder>label</zorder>
   </widget>
  </widget>
  <resources/>

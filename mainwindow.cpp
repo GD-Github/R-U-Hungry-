@@ -591,7 +591,7 @@ void MainWindow::command(){
     update();
     QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(close()));
-        timer->start(2000);}}
+        timer->start(5000);}}
     else{
     int val = rechargeBox->exec();
     if (val == 1){

@@ -29,12 +29,12 @@
 
 #windowButton {
 	background-color: transparent;
-	border: 2px dashed rgb(85, 85, 127);
-	border-radius: 10px;
+	border: 2px dotted rgb(85, 85, 127);
+	border-radius: 12px;
 }
 
 #windowButton:hover {
-	border: 2px dashed rgb(240, 235, 255);
+	border: 2px dotted rgb(240, 235, 255);
 }
 
 #logoLbl {	
@@ -45,6 +45,7 @@
 }
 
 #label {
+	background-color: transparent;
 	color: rgb(85, 85, 127);
 	font-weight: bold;
 	qproperty-alignment: AlignCenter;
@@ -76,10 +77,10 @@
    <widget class="QLabel" name="logoLbl">
     <property name="geometry">
      <rect>
-      <x>170</x>
-      <y>50</y>
-      <width>221</width>
-      <height>31</height>
+      <x>100</x>
+      <y>30</y>
+      <width>361</width>
+      <height>61</height>
      </rect>
     </property>
     <property name="text">
@@ -90,7 +91,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>480</y>
+      <y>490</y>
       <width>561</width>
       <height>71</height>
      </rect>
