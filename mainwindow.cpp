@@ -312,6 +312,7 @@ MainWindow::MainWindow(User* currentUser,QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+
     delete currentUser;
     delete availableMeal;
     delete ui;
@@ -583,12 +584,13 @@ void MainWindow::command(){
     int val = confirmationBox->exec();
     if(val ==1){
     currentUser->removeSolde(totalPrice);
+    currentUser->saveUser();
     emit(soldeChanged(currentUser->getSolde()));
     currentCommand->clear();
     updateLists();
     QTimer *timer2 = new QTimer(this);
         connect(timer2, SIGNAL(timeout()),this,SLOT(aboutToQuit()));
-        timer2->start(300);};
+        timer2->start(300);}
 
     update();
     QTimer *timer = new QTimer(this);
