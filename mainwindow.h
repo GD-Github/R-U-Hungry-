@@ -114,6 +114,7 @@ public slots:
     void delHalalFilter();
     void delAllerFilter();
     void delGlutenFilter();
+    void aboutToQuit();
 
 signals:
     void soldeChanged(double);

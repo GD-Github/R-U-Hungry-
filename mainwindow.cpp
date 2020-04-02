@@ -586,12 +586,14 @@ void MainWindow::command(){
     emit(soldeChanged(currentUser->getSolde()));
     currentCommand->clear();
     updateLists();
-    qw->show();
-    this->hide();
+    QTimer *timer2 = new QTimer(this);
+        connect(timer2, SIGNAL(timeout()),this,SLOT(aboutToQuit()));
+        timer2->start(300);};
+
     update();
     QTimer *timer = new QTimer(this);
         connect(timer, SIGNAL(timeout()), this, SLOT(close()));
-        timer->start(5000);}}
+        timer->start(5000);}
     else{
     int val = rechargeBox->exec();
     if (val == 1){
@@ -670,6 +672,11 @@ void MainWindow::filter(){
         this->filters[3]=false;
     }
     updateLists();
+}
+
+void MainWindow::aboutToQuit(){
+    qw->show();
+    this->hide();
 }
 
 void MainWindow::cancelFilter(){
