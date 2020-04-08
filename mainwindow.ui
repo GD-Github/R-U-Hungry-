@@ -530,6 +530,14 @@ QScrollArea {
 	qproperty-alignment: 'AlignVCenter | AlignLeft';
 }
 
+#commandScrollArea QPushButton {
+	background-color: white;
+	border: 0px solid white;
+	border-radius: 4px;
+	max-width: 22px;
+	min-height: 22px;
+}
+
 QTabWidget QScrollArea {
 	border: 2px solid rgb(248, 253, 255);
 	border-radius: 6px;
