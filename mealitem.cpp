@@ -1,6 +1,7 @@
 #include "mealitem.h"
+#include <iostream>
 
-MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn,bool hasArrowBtn, bool isChecked) :QWidget()
+MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool hasFavoriteBtn, bool hasBannedBtn,bool hasArrowBtn, bool isChecked,bool hasQuantity) :QWidget()
 {
     this->hasBannedBtn = hasBannedBtn;
     this->hasFavoriteBtn = hasFavoriteBtn;
@@ -8,6 +9,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     this->parent = parent;
     this->meal = item;
     this->isChecked = isChecked;
+    this->hasQuantity=hasQuantity;
     /*vLayout = new QVBoxLayout();*/
     QHBoxLayout *layout = new QHBoxLayout;
 
@@ -56,14 +58,50 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
     connect(bannedButton, &QPushButton::clicked, [=]{ parent->bannedAsChanged(this->meal->getId() ); });
     }
     if(this->hasArrowBtn){
-    infoButton = new QPushButton(QIcon(":/icons/info+.png"),"",this);
-    layout->addWidget(infoButton, 1);
-    connect(infoButton, SIGNAL(clicked()), this, SLOT(displayInfo()));}
+        infoButton = new QPushButton(QIcon(":/icons/info+.png"),"",this);
+        layout->addWidget(infoButton, 1);
+        connect(infoButton, SIGNAL(clicked()), this, SLOT(displayInfo()));
+    }
+    if (this->hasQuantity){
+        plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
+        lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
+        quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        quantityIcon->setFlat(false);
+        quantityIcon->setCheckable(false);
+        quantityIcon->setDown(false);
+        QLabel * qtt = new QLabel("Quantité : ");
+        layout->addWidget(qtt,2);
+        layout->addWidget(plusButton,1);
+        layout->addWidget(quantityIcon,1);
+        layout->addWidget(lessButton,1);
+
+        connect(plusButton, SIGNAL(clicked()), this, SLOT(plusQuantity()));
+        connect(lessButton, SIGNAL(clicked()), this, SLOT(lessQuantity()));
+    }
 
     this->setLayout(main_layout);
 
 }
 
+void MealItem::plusQuantity(){
+    if (quantity==1){
+        quantity+=1;
+        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
+    }else if(quantity==2){
+        quantity+=1;
+        quantityIcon->setIcon(QIcon(":/icons/high.png"));
+    }
+}
+
+void MealItem::lessQuantity(){
+    if (quantity==3){
+        quantity-=1;
+        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
+    }else if (quantity==2){
+        quantity-=1;
+        quantityIcon->setIcon(QIcon(":/icons/low.png"));
+    }
+}
 
 void MealItem::mousePressEvent(QMouseEvent *event)
 {

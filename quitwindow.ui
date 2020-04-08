@@ -52,13 +52,28 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>480</y>
+      <y>490</y>
       <width>561</width>
       <height>71</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tw Cen MT Condensed Extra Bold</family>
+      <pointsize>18</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
+     </font>
+    </property>
     <property name="text">
-     <string>Bon appétit ! N'oubliez pas de prendre votre ticket</string>
+     <string>Bon appétit ! N'oubliez pas votre ticket</string>
     </property>
    </widget>
    <widget class="QWidget" name="widget" native="true">

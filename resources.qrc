@@ -12,6 +12,11 @@
         <file>scan.png</file>
         <file>machine.png</file>
         <file>ticket.png</file>
+        <file>high.png</file>
+        <file>low.png</file>
+        <file>medium.png</file>
+        <file>less.png</file>
+        <file>plus.png</file>
     </qresource>
     <qresource prefix="/">
         <file>mealList.json</file>

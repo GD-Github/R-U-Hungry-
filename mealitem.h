@@ -22,12 +22,15 @@ class MealItem : public QWidget
     Q_OBJECT
 
 public:
-    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false, bool hasFavoriteBtn = true, bool hasBannedBtn = true, bool hasArrowBtn = true ,bool isChecked = false);
+    MealItem(Meal_Window* parent, Meal * item, bool canBeChecked = false, bool hasFavoriteBtn = true, bool hasBannedBtn = true, bool hasArrowBtn = true ,bool isChecked = false, bool hasQuantity=false);
     Meal * getMeal() {return meal;}
     bool getIsChecked(){return isChecked;}
+    void changeHasQuantity(){if (hasQuantity){this->hasQuantity=false;}else{this->hasQuantity=true;}}
 
 public slots:
     void displayInfo();
+    void plusQuantity();
+    void lessQuantity();
 
 private:
     Meal_Window * parent;
@@ -41,6 +44,11 @@ private:
     QLabel* descrip;
     QLabel* kcal;
     QPushButton * infoButton;
+    int quantity = 2;
+    QPushButton * plusButton;
+    QPushButton * lessButton;
+    bool hasQuantity = false;
+    QPushButton* quantityIcon;
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
