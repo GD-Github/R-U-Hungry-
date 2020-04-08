@@ -34,8 +34,36 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
             this->isChecked = !this->isChecked;
             parent->cartAsChanged(this->meal->getId());});
     }
-    layout->addWidget(new QLabel(item->getName()), 8);
-    layout->addWidget(new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC)), 2);
+
+
+    if (this->hasQuantity){
+        layout->addWidget(new QLabel(item->getName()), 3);
+
+        QHBoxLayout * quantityLayout = new QHBoxLayout;
+        plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
+        lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
+        quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        quantityIcon->setFlat(false);
+        quantityIcon->setCheckable(false);
+        quantityIcon->setDown(false);
+        QLabel * qtt = new QLabel("Quantité : ");
+        quantityLayout->addWidget(qtt);
+        quantityLayout->setAlignment(qtt, Qt::AlignRight);
+        quantityLayout->addWidget(plusButton);
+        quantityLayout->addWidget(quantityIcon);
+        quantityLayout->addWidget(lessButton);
+        layout->addLayout(quantityLayout, 5);
+        connect(plusButton, SIGNAL(clicked()), this, SLOT(plusQuantity()));
+        connect(lessButton, SIGNAL(clicked()), this, SLOT(lessQuantity()));
+        QLabel* lbl = new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC));
+        layout->addWidget(lbl, 3);
+        layout->setAlignment(lbl,Qt::AlignCenter);
+    }else{
+        layout->addWidget(new QLabel(item->getName()), 8);
+        QLabel* lbl = new QLabel(QString::fromStdString(std::to_string(meal->getPrice()).substr(0,4))+" "+QChar(0x20AC));
+        layout->addWidget(lbl, 3);
+        layout->setAlignment(lbl,Qt::AlignCenter);
+    }
 
     if(this->hasFavoriteBtn){
     QPushButton * likeButton = new QPushButton(QIcon(":/icons/heart.png"),"",this);
@@ -62,23 +90,6 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
         layout->addWidget(infoButton, 1);
         connect(infoButton, SIGNAL(clicked()), this, SLOT(displayInfo()));
     }
-    if (this->hasQuantity){
-        plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
-        lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
-        quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
-        quantityIcon->setFlat(false);
-        quantityIcon->setCheckable(false);
-        quantityIcon->setDown(false);
-        QLabel * qtt = new QLabel("Quantité : ");
-        layout->addWidget(qtt,2);
-        layout->addWidget(plusButton,1);
-        layout->addWidget(quantityIcon,1);
-        layout->addWidget(lessButton,1);
-
-        connect(plusButton, SIGNAL(clicked()), this, SLOT(plusQuantity()));
-        connect(lessButton, SIGNAL(clicked()), this, SLOT(lessQuantity()));
-    }
-
     this->setLayout(main_layout);
 
 }
