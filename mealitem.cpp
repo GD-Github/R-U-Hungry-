@@ -43,6 +43,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
         plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
         lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
         quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        updateQuantityIcon();
         quantityIcon->setFlat(false);
         quantityIcon->setCheckable(false);
         quantityIcon->setDown(false);
@@ -94,24 +95,28 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
 }
 
-void MealItem::plusQuantity(){
-    if (quantity==1){
-        quantity+=1;
+void MealItem::updateQuantityIcon(){
+    switch (meal->getQuantity()) {
+    case 1:
+        quantityIcon->setIcon(QIcon(":/icons/low.png"));
+        break;
+    case 2:
         quantityIcon->setIcon(QIcon(":/icons/medium.png"));
-    }else if(quantity==2){
-        quantity+=1;
+        break;
+    case 3:
         quantityIcon->setIcon(QIcon(":/icons/high.png"));
+        break;
     }
 }
 
+void MealItem::plusQuantity(){
+    meal->plusQuantity();
+    updateQuantityIcon();
+}
+
 void MealItem::lessQuantity(){
-    if (quantity==3){
-        quantity-=1;
-        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
-    }else if (quantity==2){
-        quantity-=1;
-        quantityIcon->setIcon(QIcon(":/icons/low.png"));
-    }
+    meal->lessQuantity();
+    updateQuantityIcon();
 }
 
 void MealItem::mousePressEvent(QMouseEvent *event)

@@ -27,6 +27,9 @@ public:
     void setIsFavorite(bool new_status){this->isFavorite=new_status;}
     void setIsBanned(bool status){this->isBanned=status;}
     void setFilters(std::vector<bool> new_filters){this->filters=new_filters;}
+    int getQuantity(){return quantity;}
+    void plusQuantity();
+    void lessQuantity();
     std::vector<bool> getFilters(){return filters;}
 
 private:
@@ -39,6 +42,7 @@ private:
     int type = 0;
     bool isFavorite;
     bool isBanned;
+    int quantity = 2;
     QString description;
     std::vector<bool> filters = {false,false,false,false}; //index 0 for vege, 1 for halal, 2 for free allergens, 3 for free gluten
 };

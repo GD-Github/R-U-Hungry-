@@ -4,3 +4,19 @@ Meal::Meal(int id, QString name,int type, float price, int kCal, bool isVegetari
 {
 
 }
+
+void Meal::plusQuantity(){
+    if (quantity==1){
+        quantity+=1;
+    }else if(quantity==2){
+        quantity+=1;
+    }
+}
+
+void Meal::lessQuantity(){
+    if (quantity==3){
+        quantity-=1;
+    }else if (quantity==2){
+        quantity-=1;
+    }
+}
