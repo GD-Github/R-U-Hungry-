@@ -27,6 +27,9 @@ public:
     void setIsFavorite(bool new_status){this->isFavorite=new_status;}
     void setIsBanned(bool status){this->isBanned=status;}
     void setFilters(std::vector<bool> new_filters){this->filters=new_filters;}
+    int getQuantity(){return quantity;}
+    void plusQuantity();
+    void lessQuantity();
     std::vector<bool> getFilters(){return filters;}
     void setQuantity(int nwq){quantity = nwq;}
     int getQuantity(){return this->quantity;}

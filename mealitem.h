@@ -31,6 +31,7 @@ public slots:
     void displayInfo();
     void plusQuantity();
     void lessQuantity();
+    void updateQuantityIcon();
 
 private:
     Meal_Window * parent;
@@ -44,7 +45,6 @@ private:
     QLabel* descrip;
     QLabel* kcal;
     QPushButton * infoButton;
-    int quantity = 2;
     QPushButton * plusButton;
     QPushButton * lessButton;
     bool hasQuantity = false;

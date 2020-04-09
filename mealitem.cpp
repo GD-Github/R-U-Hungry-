@@ -42,13 +42,8 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
         QHBoxLayout * quantityLayout = new QHBoxLayout;
         plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
         lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
-        if (qtity==1){
-            quantityIcon = new QPushButton(QIcon(":/icons/low.png"),"",this);
-        }else if (qtity==2){
-            quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
-        }else{
-            quantityIcon = new QPushButton(QIcon(":/icons/high.png"),"",this);
-        }
+        quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        updateQuantityIcon();
         quantityIcon->setFlat(false);
         quantityIcon->setCheckable(false);
         quantityIcon->setDown(false);
@@ -100,6 +95,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
 }
 
+<<<<<<< HEAD
 void MealItem::plusQuantity(){
     if (quantity==1){
         quantity+=1;
@@ -108,11 +104,29 @@ void MealItem::plusQuantity(){
     }else if(quantity==2){
         quantity+=1;
         meal->setQuantity(3);
+=======
+void MealItem::updateQuantityIcon(){
+    switch (meal->getQuantity()) {
+    case 1:
+        quantityIcon->setIcon(QIcon(":/icons/low.png"));
+        break;
+    case 2:
+        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
+        break;
+    case 3:
+>>>>>>> 69f89018c76254cf46fac4906b60918058f6973a
         quantityIcon->setIcon(QIcon(":/icons/high.png"));
+        break;
     }
 }
 
+void MealItem::plusQuantity(){
+    meal->plusQuantity();
+    updateQuantityIcon();
+}
+
 void MealItem::lessQuantity(){
+<<<<<<< HEAD
     if (quantity==3){
         quantity-=1;
         meal->setQuantity(2);
@@ -122,6 +136,10 @@ void MealItem::lessQuantity(){
         meal->setQuantity(1);
         quantityIcon->setIcon(QIcon(":/icons/low.png"));
     }
+=======
+    meal->lessQuantity();
+    updateQuantityIcon();
+>>>>>>> 69f89018c76254cf46fac4906b60918058f6973a
 }
 
 void MealItem::mousePressEvent(QMouseEvent *event)
