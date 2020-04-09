@@ -38,11 +38,17 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
     if (this->hasQuantity){
         layout->addWidget(new QLabel(item->getName()), 3);
-
+        int qtity = meal->getQuantity();
         QHBoxLayout * quantityLayout = new QHBoxLayout;
         plusButton = new QPushButton(QIcon(":/icons/plus.png"),"",this);
         lessButton = new QPushButton(QIcon(":/icons/less.png"),"",this);
-        quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        if (qtity==1){
+            quantityIcon = new QPushButton(QIcon(":/icons/low.png"),"",this);
+        }else if (qtity==2){
+            quantityIcon = new QPushButton(QIcon(":/icons/medium.png"),"",this);
+        }else{
+            quantityIcon = new QPushButton(QIcon(":/icons/high.png"),"",this);
+        }
         quantityIcon->setFlat(false);
         quantityIcon->setCheckable(false);
         quantityIcon->setDown(false);
@@ -97,9 +103,11 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 void MealItem::plusQuantity(){
     if (quantity==1){
         quantity+=1;
+        meal->setQuantity(2);
         quantityIcon->setIcon(QIcon(":/icons/medium.png"));
     }else if(quantity==2){
         quantity+=1;
+        meal->setQuantity(3);
         quantityIcon->setIcon(QIcon(":/icons/high.png"));
     }
 }
@@ -107,9 +115,11 @@ void MealItem::plusQuantity(){
 void MealItem::lessQuantity(){
     if (quantity==3){
         quantity-=1;
+        meal->setQuantity(2);
         quantityIcon->setIcon(QIcon(":/icons/medium.png"));
     }else if (quantity==2){
         quantity-=1;
+        meal->setQuantity(1);
         quantityIcon->setIcon(QIcon(":/icons/low.png"));
     }
 }
