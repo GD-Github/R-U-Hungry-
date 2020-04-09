@@ -50,9 +50,9 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
         QLabel * qtt = new QLabel("Quantité : ");
         quantityLayout->addWidget(qtt);
         quantityLayout->setAlignment(qtt, Qt::AlignRight);
-        quantityLayout->addWidget(plusButton);
-        quantityLayout->addWidget(quantityIcon);
         quantityLayout->addWidget(lessButton);
+        quantityLayout->addWidget(quantityIcon);
+        quantityLayout->addWidget(plusButton);
         layout->addLayout(quantityLayout, 5);
         connect(plusButton, SIGNAL(clicked()), this, SLOT(plusQuantity()));
         connect(lessButton, SIGNAL(clicked()), this, SLOT(lessQuantity()));
@@ -95,16 +95,7 @@ MealItem::MealItem(Meal_Window * parent , Meal * item, bool canBeChecked, bool h
 
 }
 
-<<<<<<< HEAD
-void MealItem::plusQuantity(){
-    if (quantity==1){
-        quantity+=1;
-        meal->setQuantity(2);
-        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
-    }else if(quantity==2){
-        quantity+=1;
-        meal->setQuantity(3);
-=======
+
 void MealItem::updateQuantityIcon(){
     switch (meal->getQuantity()) {
     case 1:
@@ -114,7 +105,6 @@ void MealItem::updateQuantityIcon(){
         quantityIcon->setIcon(QIcon(":/icons/medium.png"));
         break;
     case 3:
->>>>>>> 69f89018c76254cf46fac4906b60918058f6973a
         quantityIcon->setIcon(QIcon(":/icons/high.png"));
         break;
     }
@@ -126,20 +116,8 @@ void MealItem::plusQuantity(){
 }
 
 void MealItem::lessQuantity(){
-<<<<<<< HEAD
-    if (quantity==3){
-        quantity-=1;
-        meal->setQuantity(2);
-        quantityIcon->setIcon(QIcon(":/icons/medium.png"));
-    }else if (quantity==2){
-        quantity-=1;
-        meal->setQuantity(1);
-        quantityIcon->setIcon(QIcon(":/icons/low.png"));
-    }
-=======
     meal->lessQuantity();
     updateQuantityIcon();
->>>>>>> 69f89018c76254cf46fac4906b60918058f6973a
 }
 
 void MealItem::mousePressEvent(QMouseEvent *event)

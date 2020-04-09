@@ -13,7 +13,7 @@ using namespace std;
 class Meal
 {
 public:
-    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite, bool isBanned, std::vector<bool> filters, QString description, int quantity);
+    Meal(int id, QString name,int type, float price, int kCal, bool isVegetarian, bool containAllergene, bool isFavorite, bool isBanned, std::vector<bool> filters, QString description, int quantity=2);
     int getId() {return id;}
     QString getName() {return name;}
     float getPrice() {return price;}
@@ -32,7 +32,6 @@ public:
     void lessQuantity();
     std::vector<bool> getFilters(){return filters;}
     void setQuantity(int nwq){quantity = nwq;}
-    int getQuantity(){return this->quantity;}
 
 private:
     int id;
